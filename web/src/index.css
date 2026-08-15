@@ -8,12 +8,14 @@ html,
 body,
 #root {
   margin: 0;
+  width: 100%;
   min-height: 100%;
   background: #d8d2c4;
   color: #1c1914;
 }
 
 html {
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
