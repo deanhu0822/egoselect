@@ -8,10 +8,8 @@
 
 ---
 
-## 📺 Demo & Resources
+[![EgoSelect Demo](https://img.youtube.com/vi/iOxlZ7C8pBA/maxresdefault.jpg)](https://www.youtube.com/watch?v=iOxlZ7C8pBA)
 
-- **Video Walkthrough:** [Watch the Demo on YouTube](https://www.youtube.com/watch?v=iOxlZ7C8pBA)
-- **Slide Deck:** [Keep 30% of the data, keep region coverage (Gamma Deck)](https://gamma.app/docs/Keep-30-of-the-data-Keep-the-region-coverage-qodfuf4zzznz8q7?mode=doc)
 
 ---
 
