@@ -46,6 +46,9 @@ export type MethodBlock = {
   stationary: number;
   corrupt_retained?: number;
   corrupt_pool?: number;
+  dup_retained?: number;
+  idle_retained?: number;
+  over_retained?: number;
 };
 
 export type MethodPoint = {

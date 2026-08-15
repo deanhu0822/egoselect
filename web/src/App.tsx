@@ -477,7 +477,7 @@ export default function App() {
           <div>
             <p className="compare-kicker">
               {stress
-                ? "Equal keep · 30% injected"
+                ? `Equal keep · ${payload.stress.n_keep} · ${payload.stress.n_injected} injected`
                 : `Equal keep · ${percent}%`}
             </p>
             <div className="methods">
@@ -487,26 +487,26 @@ export default function App() {
                   className={m.name === "EgoSelect" ? "method ego" : "method"}
                 >
                   <div className="name">{shortName(m.name)}</div>
-                  <div className="nums">
+                  <div className={stress ? "nums kinds" : "nums"}>
                     {stress ? (
                       <>
                         <div>
-                          <span>injected</span>
+                          <span>corrupted</span>
                           <b className={bestInj[i] ? "best" : ""}>
                             {m.corrupt_retained}/{m.corrupt_pool}
                           </b>
                         </div>
                         <div>
-                          <span>coverage</span>
-                          <b className={bestCov[i] ? "best" : ""}>
-                            {fmt(m.coverage)}
-                          </b>
+                          <span>duplicate</span>
+                          <b>{m.dup_retained}</b>
                         </div>
                         <div>
-                          <span>quality</span>
-                          <b className={bestQual[i] ? "best" : ""}>
-                            {fmt(m.quality)}
-                          </b>
+                          <span>idle</span>
+                          <b>{m.idle_retained}</b>
+                        </div>
+                        <div>
+                          <span>over-region</span>
+                          <b>{m.over_retained}</b>
                         </div>
                       </>
                     ) : (
@@ -544,7 +544,7 @@ export default function App() {
                 setStress(false);
               }}
             >
-              Normal
+              Original
             </button>
             <button
               type="button"

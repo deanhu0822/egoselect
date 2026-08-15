@@ -4859,7 +4859,10 @@
         "visual_coverage": 0.7736,
         "stationary": 0.0777,
         "corrupt_retained": 8,
-        "corrupt_pool": 24
+        "corrupt_pool": 24,
+        "dup_retained": 4,
+        "idle_retained": 1,
+        "over_retained": 3
       },
       {
         "name": "Dedup-only",
@@ -4869,7 +4872,10 @@
         "visual_coverage": 0.781,
         "stationary": 0.1509,
         "corrupt_retained": 4,
-        "corrupt_pool": 24
+        "corrupt_pool": 24,
+        "dup_retained": 0,
+        "idle_retained": 3,
+        "over_retained": 1
       },
       {
         "name": "Diversity-only",
@@ -4879,7 +4885,10 @@
         "visual_coverage": 0.7756,
         "stationary": 0.2419,
         "corrupt_retained": 7,
-        "corrupt_pool": 24
+        "corrupt_pool": 24,
+        "dup_retained": 0,
+        "idle_retained": 5,
+        "over_retained": 2
       },
       {
         "name": "EgoSelect",
@@ -4889,7 +4898,10 @@
         "visual_coverage": 0.7865,
         "stationary": 0.045,
         "corrupt_retained": 3,
-        "corrupt_pool": 24
+        "corrupt_pool": 24,
+        "dup_retained": 0,
+        "idle_retained": 0,
+        "over_retained": 3
       }
     ]
   }

@@ -412,6 +412,11 @@
   letter-spacing: -0.02em;
 }
 
+.method .nums.kinds {
+  grid-template-columns: auto repeat(3, auto);
+  gap: 10px;
+}
+
 .method .nums span {
   color: #6f6a60;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;

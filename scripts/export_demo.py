@@ -82,6 +82,9 @@ def _method_block(row: pd.Series, *, stress: bool) -> dict:
     if stress:
         block["corrupt_retained"] = int(row["n_corrupt_retained"])
         block["corrupt_pool"] = int(row["n_corrupt_in_pool"])
+        block["dup_retained"] = int(row["n_dup_retained"])
+        block["idle_retained"] = int(row["n_idle_retained"])
+        block["over_retained"] = int(row["n_over_retained"])
     return block
 
 
