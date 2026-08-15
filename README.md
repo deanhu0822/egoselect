@@ -6,8 +6,7 @@
 [![Demo Video](https://img.shields.io/badge/YouTube-Watch%20Demo-red?logo=youtube)](https://www.youtube.com/watch?v=iOxlZ7C8pBA)
 [![Project Slides](https://img.shields.io/badge/Gamma-Project%20Slides-blueviolet)](https://gamma.app/docs/Keep-30-of-the-data-Keep-the-region-coverage-qodfuf4zzznz8q7?mode=doc)
 
-
-[![EgoSelect Demo](assets/demo.webp)](https://www.youtube.com/watch?v=iOxlZ7C8pBA)
+[![Watch EgoSelect Demo](https://img.youtube.com/vi/iOxlZ7C8pBA/maxresdefault.jpg)](https://www.youtube.com/watch?v=iOxlZ7C8pBA&autoplay=1&mute=1)
 
 
 ---
