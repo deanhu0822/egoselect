@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.pytest_cache/
+
+# EgoVerse checkout and local episode cache (do not vendor)
+third_party/
+data/
+
+# Secrets must never be committed
+.env
+.egoverse_env
+
+# Large generated tables
+outputs/episode_table.parquet
+outputs/*.zarr

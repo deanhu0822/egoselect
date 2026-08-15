@@ -1,0 +1,31 @@
+{
+  "episode_count": 80,
+  "tasks": [
+    "cup_on_saucer",
+    "dishwashing",
+    "fold_clothes",
+    "ironing_clothes",
+    "potting_plants"
+  ],
+  "task_counts": {
+    "cup_on_saucer": 16,
+    "dishwashing": 16,
+    "fold_clothes": 16,
+    "ironing_clothes": 16,
+    "potting_plants": 16
+  },
+  "scenes": 25,
+  "labs": [
+    "mecka",
+    "rl2"
+  ],
+  "operators": 70,
+  "embodiments": [
+    "human_bimanual"
+  ],
+  "num_frames": {
+    "min": 142.0,
+    "median": 2323.5,
+    "max": 5361.0
+  }
+}

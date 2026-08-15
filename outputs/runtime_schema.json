@@ -1,0 +1,474 @@
+{
+  "inspect_hashes": [
+    "692e9858af371a654ce7fc3f",
+    "69b69bc403235b32d9cc6795",
+    "692ee08a952b26f4cc71a4cb",
+    "2025-09-23-22-15-03-000000"
+  ],
+  "resolved": [
+    "692e9858af371a654ce7fc3f",
+    "692ee08a952b26f4cc71a4cb",
+    "69b69bc403235b32d9cc6795",
+    "2025-09-23-22-15-03-000000"
+  ],
+  "raw_zarr": {
+    "692e9858af371a654ce7fc3f": {
+      "embodiment": "human_bimanual",
+      "total_frames": 198,
+      "n_keys": 9,
+      "keys": [
+        "annotations",
+        "images.front_1",
+        "left.obs_ee_pose",
+        "left.obs_keypoints",
+        "left.obs_wrist_pose",
+        "obs_head_pose",
+        "right.obs_ee_pose",
+        "right.obs_keypoints",
+        "right.obs_wrist_pose"
+      ],
+      "optional_present": {
+        "left.obs_keypoints": true,
+        "right.obs_keypoints": true,
+        "left.obs_wrist_pose": true,
+        "right.obs_wrist_pose": true,
+        "left.obs_aria_keypoints": false,
+        "right.obs_aria_keypoints": false,
+        "obs_head_pose": true,
+        "obs_eye_gaze": false,
+        "annotations": true,
+        "images.right_wrist": false,
+        "images.left_wrist": false,
+        "right.cmd_ee_pose": false,
+        "left.cmd_ee_pose": false
+      }
+    },
+    "692ee08a952b26f4cc71a4cb": {
+      "embodiment": "human_bimanual",
+      "total_frames": 197,
+      "n_keys": 9,
+      "keys": [
+        "annotations",
+        "images.front_1",
+        "left.obs_ee_pose",
+        "left.obs_keypoints",
+        "left.obs_wrist_pose",
+        "obs_head_pose",
+        "right.obs_ee_pose",
+        "right.obs_keypoints",
+        "right.obs_wrist_pose"
+      ],
+      "optional_present": {
+        "left.obs_keypoints": true,
+        "right.obs_keypoints": true,
+        "left.obs_wrist_pose": true,
+        "right.obs_wrist_pose": true,
+        "left.obs_aria_keypoints": false,
+        "right.obs_aria_keypoints": false,
+        "obs_head_pose": true,
+        "obs_eye_gaze": false,
+        "annotations": true,
+        "images.right_wrist": false,
+        "images.left_wrist": false,
+        "right.cmd_ee_pose": false,
+        "left.cmd_ee_pose": false
+      }
+    },
+    "69b69bc403235b32d9cc6795": {
+      "embodiment": "human_bimanual",
+      "total_frames": 2002,
+      "n_keys": 9,
+      "keys": [
+        "annotations",
+        "images.front_1",
+        "left.obs_ee_pose",
+        "left.obs_keypoints",
+        "left.obs_wrist_pose",
+        "obs_head_pose",
+        "right.obs_ee_pose",
+        "right.obs_keypoints",
+        "right.obs_wrist_pose"
+      ],
+      "optional_present": {
+        "left.obs_keypoints": true,
+        "right.obs_keypoints": true,
+        "left.obs_wrist_pose": true,
+        "right.obs_wrist_pose": true,
+        "left.obs_aria_keypoints": false,
+        "right.obs_aria_keypoints": false,
+        "obs_head_pose": true,
+        "obs_eye_gaze": false,
+        "annotations": true,
+        "images.right_wrist": false,
+        "images.left_wrist": false,
+        "right.cmd_ee_pose": false,
+        "left.cmd_ee_pose": false
+      }
+    },
+    "2025-09-23-22-15-03-000000": {
+      "embodiment": "human_bimanual",
+      "total_frames": 2312,
+      "n_keys": 13,
+      "keys": [
+        "annotations",
+        "images.front_1",
+        "left.obs_aria_keypoints",
+        "left.obs_ee_pose",
+        "left.obs_keypoints",
+        "left.obs_wrist_pose",
+        "obs_eye_gaze",
+        "obs_head_pose",
+        "obs_rgb_timestamps_ns",
+        "right.obs_aria_keypoints",
+        "right.obs_ee_pose",
+        "right.obs_keypoints",
+        "right.obs_wrist_pose"
+      ],
+      "optional_present": {
+        "left.obs_keypoints": true,
+        "right.obs_keypoints": true,
+        "left.obs_wrist_pose": true,
+        "right.obs_wrist_pose": true,
+        "left.obs_aria_keypoints": true,
+        "right.obs_aria_keypoints": true,
+        "obs_head_pose": true,
+        "obs_eye_gaze": true,
+        "annotations": true,
+        "images.right_wrist": false,
+        "images.left_wrist": false,
+        "right.cmd_ee_pose": false,
+        "left.cmd_ee_pose": false
+      },
+      "lab": "rl2",
+      "rig_name": "aria_gen1"
+    }
+  },
+  "batches": [
+    {
+      "keys": [
+        "observations.images.front_img_1",
+        "actions_cartesian",
+        "observations.state.ee_pose",
+        "embodiment",
+        "intrinsics",
+        "episode_hash"
+      ],
+      "fields": {
+        "observations.images.front_img_1": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            360,
+            640
+          ],
+          "dtype": "torch.float32"
+        },
+        "actions_cartesian": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            100,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "observations.state.ee_pose": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "embodiment": {
+          "kind": "tensor",
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64"
+        },
+        "intrinsics": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            4
+          ],
+          "dtype": "torch.float32"
+        },
+        "episode_hash": {
+          "kind": "list",
+          "len": 1,
+          "item": {
+            "kind": "str",
+            "value": "'692e9858af371a654ce7fc3f'"
+          }
+        }
+      },
+      "episode_hash": "692e9858af371a654ce7fc3f",
+      "embodiment": 3,
+      "required_present": {
+        "observations.images.front_img_1": true,
+        "actions_cartesian": true,
+        "observations.state.ee_pose": true,
+        "intrinsics": true,
+        "embodiment": true,
+        "episode_hash": true
+      }
+    },
+    {
+      "keys": [
+        "observations.images.front_img_1",
+        "actions_cartesian",
+        "observations.state.ee_pose",
+        "embodiment",
+        "intrinsics",
+        "episode_hash"
+      ],
+      "fields": {
+        "observations.images.front_img_1": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            360,
+            640
+          ],
+          "dtype": "torch.float32"
+        },
+        "actions_cartesian": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            100,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "observations.state.ee_pose": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "embodiment": {
+          "kind": "tensor",
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64"
+        },
+        "intrinsics": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            4
+          ],
+          "dtype": "torch.float32"
+        },
+        "episode_hash": {
+          "kind": "list",
+          "len": 1,
+          "item": {
+            "kind": "str",
+            "value": "'692ee08a952b26f4cc71a4cb'"
+          }
+        }
+      },
+      "episode_hash": "692ee08a952b26f4cc71a4cb",
+      "embodiment": 3,
+      "required_present": {
+        "observations.images.front_img_1": true,
+        "actions_cartesian": true,
+        "observations.state.ee_pose": true,
+        "intrinsics": true,
+        "embodiment": true,
+        "episode_hash": true
+      }
+    },
+    {
+      "keys": [
+        "observations.images.front_img_1",
+        "actions_cartesian",
+        "observations.state.ee_pose",
+        "embodiment",
+        "intrinsics",
+        "episode_hash"
+      ],
+      "fields": {
+        "observations.images.front_img_1": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            360,
+            640
+          ],
+          "dtype": "torch.float32"
+        },
+        "actions_cartesian": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            100,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "observations.state.ee_pose": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "embodiment": {
+          "kind": "tensor",
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64"
+        },
+        "intrinsics": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            4
+          ],
+          "dtype": "torch.float32"
+        },
+        "episode_hash": {
+          "kind": "list",
+          "len": 1,
+          "item": {
+            "kind": "str",
+            "value": "'69b69bc403235b32d9cc6795'"
+          }
+        }
+      },
+      "episode_hash": "69b69bc403235b32d9cc6795",
+      "embodiment": 3,
+      "required_present": {
+        "observations.images.front_img_1": true,
+        "actions_cartesian": true,
+        "observations.state.ee_pose": true,
+        "intrinsics": true,
+        "embodiment": true,
+        "episode_hash": true
+      }
+    },
+    {
+      "keys": [
+        "observations.images.front_img_1",
+        "actions_cartesian",
+        "observations.state.ee_pose",
+        "embodiment",
+        "intrinsics",
+        "episode_hash"
+      ],
+      "fields": {
+        "observations.images.front_img_1": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            480,
+            640
+          ],
+          "dtype": "torch.float32"
+        },
+        "actions_cartesian": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            100,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "observations.state.ee_pose": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            12
+          ],
+          "dtype": "torch.float32"
+        },
+        "embodiment": {
+          "kind": "tensor",
+          "shape": [
+            1
+          ],
+          "dtype": "torch.int64"
+        },
+        "intrinsics": {
+          "kind": "tensor",
+          "shape": [
+            1,
+            3,
+            4
+          ],
+          "dtype": "torch.float32"
+        },
+        "episode_hash": {
+          "kind": "str",
+          "value": "2025-09-23-22-15-03-000000"
+        }
+      },
+      "episode_hash": "2025-09-23-22-15-03-000000",
+      "embodiment": 3,
+      "required_present": {
+        "observations.images.front_img_1": true,
+        "actions_cartesian": true,
+        "observations.state.ee_pose": true,
+        "intrinsics": true,
+        "embodiment": true,
+        "episode_hash": true
+      }
+    }
+  ],
+  "required_runtime_keys": [
+    "observations.images.front_img_1",
+    "actions_cartesian",
+    "observations.state.ee_pose",
+    "intrinsics",
+    "embodiment",
+    "episode_hash"
+  ],
+  "notes": {
+    "mecka_front_rgb": [
+      1,
+      3,
+      360,
+      640
+    ],
+    "aria_front_rgb": [
+      1,
+      3,
+      480,
+      640
+    ],
+    "cartesian_action_chunk": [
+      1,
+      100,
+      12
+    ],
+    "ee_pose": [
+      1,
+      12
+    ],
+    "intrinsics": [
+      1,
+      3,
+      4
+    ],
+    "keypoints_on_disk_not_in_cartesian_batch": true,
+    "rgb_value_range": "[0, 1] float32, nonzero"
+  }
+}

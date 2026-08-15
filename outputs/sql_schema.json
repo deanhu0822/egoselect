@@ -1,0 +1,112 @@
+{
+  "n_rows": 446957,
+  "columns": [
+    "episode_hash",
+    "operator",
+    "lab",
+    "num_frames",
+    "task",
+    "task_description",
+    "scene",
+    "objects",
+    "is_deleted",
+    "embodiment",
+    "is_eval",
+    "eval_score",
+    "eval_success",
+    "zarr_processed_path",
+    "zarr_processing_error",
+    "zarr_mp4_path",
+    "license",
+    "segments",
+    "created_at",
+    "updated_at",
+    "rig_name"
+  ],
+  "dtypes": {
+    "episode_hash": "str",
+    "operator": "str",
+    "lab": "str",
+    "num_frames": "float64",
+    "task": "str",
+    "task_description": "str",
+    "scene": "str",
+    "objects": "str",
+    "is_deleted": "bool",
+    "embodiment": "str",
+    "is_eval": "bool",
+    "eval_score": "float64",
+    "eval_success": "object",
+    "zarr_processed_path": "str",
+    "zarr_processing_error": "str",
+    "zarr_mp4_path": "str",
+    "license": "str",
+    "segments": "object",
+    "created_at": "datetime64[us, UTC]",
+    "updated_at": "datetime64[us, UTC]",
+    "rig_name": "str"
+  },
+  "embodiment_counts": {
+    "human_bimanual": 421014,
+    "eva_bimanual": 21720,
+    "human_right_arm": 3046,
+    "human_left_arm": 839,
+    "yam_bimanual": 182,
+    "eva_right_arm": 101,
+    "eva_left_arm": 50,
+    "NaN": 3,
+    "": 2
+  },
+  "lab_counts": {
+    "microagi": 355926,
+    "mecka": 41617,
+    "scale": 24814,
+    "abc": 18456,
+    "rl2": 4987,
+    "eth": 543,
+    "song": 281,
+    "yam": 182,
+    "wang": 147,
+    "NaN": 3,
+    "": 1
+  },
+  "current_embodiments": {
+    "enum": [
+      "human_right_arm",
+      "human_left_arm",
+      "human_bimanual",
+      "eva_right_arm",
+      "eva_left_arm",
+      "eva_bimanual"
+    ],
+    "human_bimanual_id": 3,
+    "eva_bimanual_id": 6,
+    "sql_eval_columns": [
+      "task",
+      "scene",
+      "lab",
+      "operator"
+    ],
+    "human_cartesian_zarr_keys": [
+      "images.front_1",
+      "right.obs_ee_pose",
+      "left.obs_ee_pose",
+      "right.obs_ee_pose",
+      "left.obs_ee_pose",
+      "obs_head_pose"
+    ],
+    "eva_cartesian_zarr_keys": [
+      "images.front_1",
+      "images.right_wrist",
+      "images.left_wrist",
+      "right.obs_ee_pose",
+      "right.obs_gripper",
+      "left.obs_ee_pose",
+      "left.obs_gripper",
+      "right.cmd_gripper",
+      "left.cmd_gripper",
+      "right.cmd_ee_pose",
+      "left.cmd_ee_pose"
+    ]
+  }
+}

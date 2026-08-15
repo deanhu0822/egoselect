@@ -1,0 +1,21 @@
+# Phase 1 runtime. Install EgoVerse separately:
+#   git clone --depth 1 https://github.com/GaTech-RL2/EgoVerse.git third_party/EgoVerse
+#   uv pip install -e third_party/EgoVerse --no-deps
+torch
+torchvision
+pandas
+pyarrow
+sqlalchemy
+psycopg[binary]
+boto3
+cloudpathlib
+zarr==3.1.5
+simplejpeg
+numpy
+tqdm
+scipy
+opencv-python
+matplotlib
+projectaria-tools==2.0.0
+scaleapi
+prettytable
