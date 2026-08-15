@@ -1,0 +1,20 @@
+{
+  "n_episodes": 80,
+  "n_rescore_passes": 80,
+  "greedy_recomputed": true,
+  "first_pick": "692e90f07641010d043544f1",
+  "max_quality": "692e90f07641010d043544f1",
+  "first_pick_is_max_quality": true,
+  "second_pick": "69bb089c54cd0f45440771db",
+  "second_by_quality": "692ee10d45175992cd6a0bed",
+  "ranking_changed_after_first": true,
+  "max_abs_value_shift_after_first": 0.536707351455966,
+  "keep_example": {
+    "episode": "692e90f07641010d043544f1",
+    "reason": "High quality (1.000); Underrepresented region 4"
+  },
+  "drop_example": {
+    "episode": "692f13d3f59fd218b1be026e",
+    "reason": "Region already represented; High stationary content (19%)"
+  }
+}

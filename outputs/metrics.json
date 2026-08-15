@@ -1,0 +1,207 @@
+{
+  "n_real": 80,
+  "budgets": {
+    "0.1": {
+      "n_keep": 8,
+      "methods": {
+        "EgoSelect": {
+          "n_keep": 8,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9987407394871763,
+          "nn_redundancy": 0.11962083528790517,
+          "stationary_content_ratio": 0.008395070085491202,
+          "visual_coverage": 0.6267586698581181,
+          "motion_coverage": 0.9999913517732748,
+          "task_diversity": 0.8,
+          "scene_diversity": 0.25,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.11428571428571428,
+          "method": "EgoSelect",
+          "budget": 0.1,
+          "greedy_recomputed": true,
+          "n_rescore_passes": 80
+        },
+        "Dedup-only": {
+          "n_keep": 8,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9957198557222747,
+          "nn_redundancy": 0.05387562846667186,
+          "stationary_content_ratio": 0.0285342951848351,
+          "visual_coverage": 0.6710675089999623,
+          "motion_coverage": 0.9999855768310738,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.2916666666666667,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.11428571428571428,
+          "method": "Dedup-only",
+          "budget": 0.1
+        },
+        "Diversity-only": {
+          "n_keep": 8,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9925105559880294,
+          "nn_redundancy": 0.3104635868130009,
+          "stationary_content_ratio": 0.04992962674647061,
+          "visual_coverage": 0.5747228245297158,
+          "motion_coverage": 0.9999880863727093,
+          "task_diversity": 0.8,
+          "scene_diversity": 0.25,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.11428571428571428,
+          "method": "Diversity-only",
+          "budget": 0.1
+        },
+        "Random": {
+          "n_keep": 8,
+          "behavioral_region_coverage": 0.6666666666666666,
+          "average_quality": 0.9975213785426229,
+          "nn_redundancy": 0.30773956060871466,
+          "stationary_content_ratio": 0.016524143049180116,
+          "visual_coverage": 0.6358424567158693,
+          "motion_coverage": 0.999987469404234,
+          "task_diversity": 0.8,
+          "scene_diversity": 0.16666666666666666,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.11428571428571428,
+          "method": "Random",
+          "budget": 0.1
+        }
+      }
+    },
+    "0.3": {
+      "n_keep": 24,
+      "methods": {
+        "EgoSelect": {
+          "n_keep": 24,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9985956788113824,
+          "nn_redundancy": 0.4064373500596627,
+          "stationary_content_ratio": 0.009362141257450947,
+          "visual_coverage": 0.7846445636986337,
+          "motion_coverage": 0.9999963813144811,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.5416666666666666,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.3142857142857143,
+          "method": "EgoSelect",
+          "budget": 0.3,
+          "greedy_recomputed": true,
+          "n_rescore_passes": 80
+        },
+        "Dedup-only": {
+          "n_keep": 24,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9951327556763486,
+          "nn_redundancy": 0.37696172392743404,
+          "stationary_content_ratio": 0.03244829549100848,
+          "visual_coverage": 0.782744204226476,
+          "motion_coverage": 0.999997193307139,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.5,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.32857142857142857,
+          "method": "Dedup-only",
+          "budget": 0.3
+        },
+        "Diversity-only": {
+          "n_keep": 24,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.992672447163093,
+          "nn_redundancy": 0.48474485842451576,
+          "stationary_content_ratio": 0.048850352246046724,
+          "visual_coverage": 0.7725695987294834,
+          "motion_coverage": 0.9999953273121923,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.5833333333333334,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.34285714285714286,
+          "method": "Diversity-only",
+          "budget": 0.3
+        },
+        "Random": {
+          "n_keep": 24,
+          "behavioral_region_coverage": 0.8333333333333334,
+          "average_quality": 0.9945909081853403,
+          "nn_redundancy": 0.5342401629269747,
+          "stationary_content_ratio": 0.036060612097730704,
+          "visual_coverage": 0.772965927265686,
+          "motion_coverage": 0.9999964892124217,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.375,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.34285714285714286,
+          "method": "Random",
+          "budget": 0.3
+        }
+      }
+    },
+    "0.5": {
+      "n_keep": 40,
+      "methods": {
+        "EgoSelect": {
+          "n_keep": 40,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9983552505221807,
+          "nn_redundancy": 0.5846266723382413,
+          "stationary_content_ratio": 0.010964996518795279,
+          "visual_coverage": 0.8579162154886039,
+          "motion_coverage": 0.9999978664198107,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.6666666666666666,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.5,
+          "method": "EgoSelect",
+          "budget": 0.5,
+          "greedy_recomputed": true,
+          "n_rescore_passes": 80
+        },
+        "Dedup-only": {
+          "n_keep": 40,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.995270792458782,
+          "nn_redundancy": 0.5164471976278333,
+          "stationary_content_ratio": 0.031528050274786903,
+          "visual_coverage": 0.8607008857684374,
+          "motion_coverage": 0.9999985185483939,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.625,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.5142857142857142,
+          "method": "Dedup-only",
+          "budget": 0.5
+        },
+        "Diversity-only": {
+          "n_keep": 40,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.994236278801911,
+          "nn_redundancy": 0.5268992038287246,
+          "stationary_content_ratio": 0.03842480798726025,
+          "visual_coverage": 0.8623139595903904,
+          "motion_coverage": 0.9999975090526014,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.7916666666666666,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.5571428571428572,
+          "method": "Diversity-only",
+          "budget": 0.5
+        },
+        "Random": {
+          "n_keep": 40,
+          "behavioral_region_coverage": 1.0,
+          "average_quality": 0.9946792708899796,
+          "nn_redundancy": 0.6443841434962305,
+          "stationary_content_ratio": 0.035471527400136246,
+          "visual_coverage": 0.8454469947765816,
+          "motion_coverage": 0.9999987124053907,
+          "task_diversity": 1.0,
+          "scene_diversity": 0.5416666666666666,
+          "lab_diversity": 1.0,
+          "operator_diversity": 0.5428571428571428,
+          "method": "Random",
+          "budget": 0.5
+        }
+      }
+    }
+  },
+  "primary_budget": 0.3
+}
