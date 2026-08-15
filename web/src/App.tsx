@@ -509,87 +509,89 @@ export default function App() {
 
       <footer className="bottom">
         <div className="compare-row">
-          <div>
-            <p className="compare-kicker">
-              {stress
-                ? `Equal keep · ${payload.stress.n_keep} · ${payload.stress.n_injected} injected`
-                : `Equal keep · ${percent}%`}
-            </p>
-            <div className="methods">
-              {compared.map((m, i) => (
-                <div
-                  key={m.name}
-                  className={m.name === "EgoSelect" ? "method ego" : "method"}
-                >
-                  <div className="name">{shortName(m.name)}</div>
-                  <div className={stress ? "nums kinds" : "nums"}>
-                    {stress ? (
-                      <>
-                        <div>
-                          <span>corrupted</span>
-                          <b className={bestInj[i] ? "best" : ""}>
-                            {m.corrupt_retained}/{m.corrupt_pool}
-                          </b>
-                        </div>
-                        <div>
-                          <span>duplicate</span>
-                          <b>{m.dup_retained}</b>
-                        </div>
-                        <div>
-                          <span>idle</span>
-                          <b>{m.idle_retained}</b>
-                        </div>
-                        <div>
-                          <span>over-region</span>
-                          <b>{m.over_retained}</b>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div>
-                          <span>coverage</span>
-                          <b className={bestCov[i] ? "best" : ""}>
-                            {fmt(m.coverage)}
-                          </b>
-                        </div>
-                        <div>
-                          <span>quality</span>
-                          <b className={bestQual[i] ? "best" : ""}>
-                            {fmt(m.quality)}
-                          </b>
-                        </div>
-                        <div>
-                          <span>redundancy</span>
-                          <b className={bestRed[i] ? "best" : ""}>
-                            {fmt(m.redundancy)}
-                          </b>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="toggle">
+          <div className="modes" role="tablist" aria-label="Evaluation view">
             <button
               type="button"
-              className={stress ? "" : "on"}
+              role="tab"
+              aria-selected={!stress}
+              className={stress ? "mode" : "mode on"}
               onClick={() => {
                 setStress(false);
               }}
             >
-              Original
+              <span>Original</span>
+              <em>Equal keep · {percent}%</em>
             </button>
             <button
               type="button"
-              className={stress ? "on" : ""}
+              role="tab"
+              aria-selected={stress}
+              className={stress ? "mode on" : "mode"}
               onClick={() => {
                 setStress(true);
               }}
             >
-              Stress test
+              <span>Stress test</span>
+              <em>
+                {payload.stress.n_keep} keep · {payload.stress.n_injected}{" "}
+                injected
+              </em>
             </button>
+          </div>
+          <div className="methods">
+            {compared.map((m, i) => (
+              <div
+                key={m.name}
+                className={m.name === "EgoSelect" ? "method ego" : "method"}
+              >
+                <div className="name">{shortName(m.name)}</div>
+                <div className={stress ? "nums kinds" : "nums"}>
+                  {stress ? (
+                    <>
+                      <div className="lead">
+                        <span>corrupted</span>
+                        <b className={bestInj[i] ? "best" : ""}>
+                          {m.corrupt_retained}/{m.corrupt_pool}
+                        </b>
+                      </div>
+                      <div>
+                        <span>duplicate</span>
+                        <b>{m.dup_retained}</b>
+                      </div>
+                      <div>
+                        <span>idle</span>
+                        <b>{m.idle_retained}</b>
+                      </div>
+                      <div>
+                        <span>over-region</span>
+                        <b>{m.over_retained}</b>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <span>coverage</span>
+                        <b className={bestCov[i] ? "best" : ""}>
+                          {fmt(m.coverage)}
+                        </b>
+                      </div>
+                      <div>
+                        <span>quality</span>
+                        <b className={bestQual[i] ? "best" : ""}>
+                          {fmt(m.quality)}
+                        </b>
+                      </div>
+                      <div>
+                        <span>redundancy</span>
+                        <b className={bestRed[i] ? "best" : ""}>
+                          {fmt(m.redundancy)}
+                        </b>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <CoverageChart series={methodCurves} percent={percent} />

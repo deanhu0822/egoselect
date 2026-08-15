@@ -444,26 +444,81 @@
   min-height: 0;
 }
 
-.compare-kicker {
-  margin: 0 0 8px;
-  font-family: "SF Mono", ui-monospace, Menlo, monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #8a8478;
-}
-
 .compare-row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 28px;
-  align-items: end;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 8px;
+  min-width: 0;
+  padding: 8px;
+  border-radius: 14px;
+  background: #1c1914;
+  color: #ece7db;
+}
+
+.modes {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  min-height: 0;
+}
+
+.mode {
+  display: grid;
+  align-content: space-between;
+  justify-items: start;
+  min-height: 0;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #2a261f;
+  color: #8a8276;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mode.on {
+  background: #4a4338;
+  color: #f3eee4;
+}
+
+.mode span {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.mode em {
+  font-style: normal;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6f685c;
+}
+
+.mode.on em {
+  color: #cfc6b6;
 }
 
 .methods {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  min-height: 0;
+}
+
+.method {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  padding: 10px 12px 12px;
+  border-radius: 10px;
+  background: #332e26;
+}
+
+.method.ego {
+  background: #3d372e;
 }
 
 .method .name {
@@ -471,51 +526,54 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #8a8478;
-  padding-bottom: 8px;
-  border-bottom: 1px solid transparent;
+  color: #9a9184;
+  padding-bottom: 10px;
 }
 
 .method.ego .name {
-  color: #1c1914;
-  border-bottom-color: #1c1914;
+  color: #f3eee4;
 }
 
 .method .nums {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
-  gap: 12px;
-  margin-top: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: end;
+  gap: 8px;
   font-variant-numeric: tabular-nums;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: -0.02em;
 }
 
 .method .nums.kinds {
-  grid-template-columns: auto repeat(3, auto);
-  gap: 10px;
+  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-rows: auto auto;
+  gap: 8px 10px;
+}
+
+.method .nums .lead {
+  grid-row: 1 / span 2;
 }
 
 .method .nums span {
-  color: #6f6a60;
+  color: #8a8276;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .method .nums b {
   font-weight: 400;
-  color: #8a8478;
+  color: #8a8276;
 }
 
-.method .nums b.best {
+.method .nums b.best,
+.method.ego .nums .lead b {
   font-weight: 500;
-  color: #1c1914;
+  color: #f3eee4;
 }
 
 .curve-block {
@@ -639,27 +697,4 @@
 
 .curve-legend .ego {
   color: #f3eee4;
-}
-
-.toggle {
-  display: flex;
-  gap: 16px;
-  padding-bottom: 2px;
-}
-
-.toggle button {
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font-family: "SF Mono", ui-monospace, Menlo, monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #8a8478;
-}
-
-.toggle button.on {
-  color: #1c1914;
-  box-shadow: inset 0 -1px 0 #1c1914;
 }
