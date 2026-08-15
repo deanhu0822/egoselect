@@ -89,7 +89,7 @@ React + Vite + TypeScript, native SVG, custom CSS. No backend API.
 
 Python exports `web/public/data/demo_payload.json`; the frontend reads only that artifact.
 
-Primary interaction: retention 100% → 30%. Episodes fade by greedy rank while metrics update.
+Primary interaction: training budget 10%–100% (default 30%). Episodes fade by greedy `selection_rank` while retained / coverage / quality / redundancy update from the precomputed curve.
 
 Main view: 2D behavior-space episode field. Secondary: KEEP/DROP inspector, benchmark comparison, stress-test toggle.
 

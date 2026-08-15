@@ -36,9 +36,9 @@
 
 .top {
   display: grid;
-  grid-template-columns: 1fr 560px;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(420px, 1fr);
   align-items: end;
-  gap: 48px;
+  gap: 56px;
   padding-bottom: 14px;
   border-bottom: 1px solid #c9c1b2;
 }
@@ -62,22 +62,49 @@
 
 .slider-block {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 14px;
-  padding-bottom: 6px;
+  gap: 10px;
+  padding-bottom: 4px;
 }
 
-.slider-block label,
-.slider-block span {
+.slider-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.slider-head label {
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 11px;
   color: #6f6a60;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.slider-block input[type="range"] {
+.slider-value {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #1c1914;
+}
+
+.slider-track {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-track span {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  color: #8a8478;
+  letter-spacing: 0.08em;
+}
+
+.slider-track input[type="range"] {
   appearance: none;
   width: 100%;
   height: 1px;
@@ -85,26 +112,22 @@
   outline: none;
 }
 
-.slider-block input[type="range"]::-webkit-slider-thumb {
+.slider-track input[type="range"]::-webkit-slider-thumb {
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   background: #1c1914;
   cursor: pointer;
 }
 
-.slider-block input[type="range"]::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+.slider-track input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
   border: 0;
   border-radius: 50%;
   background: #1c1914;
   cursor: pointer;
-}
-
-.slider-block input[type="range"]:disabled {
-  opacity: 0.35;
 }
 
 .stage {
@@ -135,7 +158,36 @@
 
 .ep {
   cursor: pointer;
-  transition: opacity 120ms linear;
+  fill: #1c1914;
+  stroke: none;
+  transition: opacity 480ms ease;
+}
+
+.ep.kept {
+  opacity: 0.94;
+}
+
+.ep.drop {
+  opacity: 0.16;
+}
+
+.ep.active {
+  stroke: #1c1914;
+  stroke-width: 5;
+  stroke-opacity: 0.22;
+}
+
+.mark {
+  fill: none;
+  stroke: #1c1914;
+  stroke-width: 0.6;
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 480ms ease;
+}
+
+.mark.drop {
+  opacity: 0.18;
 }
 
 .inspector {

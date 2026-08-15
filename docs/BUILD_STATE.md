@@ -50,13 +50,14 @@ cd web && npm install && npm run build && npm run dev
 
 ## 60-second demo order
 
-1. Start at 100% retention: 80 circles, mixed useful and repetitive demonstrations.
-2. Drag retention to 30% (24/80). Coverage stays 1.000; faded circles are DROP.
-3. Click the solid ringed KEEP: `692e90f07641010d` — high quality, underrepresented region 4.
-4. Click the faded ringed DROP: `692f13d3f59fd218` — region already represented, 19% stationary.
-5. Read the four-method row: Random misses a region; Dedup has lower redundancy.
-6. Toggle Stress test: EgoSelect retains 3/24 injected items vs Random 8/24.
-7. Close on the measured headline: full coverage, highest quality, fewest injected items — not uniformly best.
+1. Default training budget 30% (24/80). Retained circles stay strong; the rest remain visible at low opacity.
+2. Drag to 100% to show useful + repetitive demonstrations mixed together.
+3. Drag back to 30%. Coverage stays 1.000. Live retained / coverage / quality / redundancy update from the greedy prefix curve.
+4. Click the solid ringed KEEP: `692e90f07641010d` — high quality, underrepresented region 4.
+5. Click the faded ringed DROP: `692f13d3f59fd218` — region already represented, 19% stationary.
+6. Read the four-method row: Random misses a region; Dedup has lower redundancy.
+7. Toggle Stress test: EgoSelect retains 3/24 injected items vs Random 8/24.
+8. Close on the measured headline: full coverage, highest quality, fewest injected items — not uniformly best.
 
 ## Next phase
 

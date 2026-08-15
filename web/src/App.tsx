@@ -6,6 +6,9 @@ const DATA_URL = "/data/demo_payload.json";
 const VW = 1040;
 const VH = 560;
 const PAD = 36;
+const BUDGET_MIN = 10;
+const BUDGET_MAX = 100;
+const BUDGET_DEFAULT = 30;
 
 function budgetCount(n: number, fraction: number): number {
   return Math.max(1, Math.min(n, Math.round(n * fraction)));
@@ -51,7 +54,7 @@ function Missing({ reason }: { reason: string }) {
 export default function App() {
   const [payload, setPayload] = useState<Payload | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
-  const [fraction, setFraction] = useState(1);
+  const [percent, setPercent] = useState(BUDGET_DEFAULT);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [stress, setStress] = useState(false);
 
@@ -83,14 +86,16 @@ export default function App() {
   }, []);
 
   const n = payload?.meta.n_episodes ?? 0;
-  const k = budgetCount(n, fraction);
+  const k = budgetCount(n, percent / 100);
   const toXY = useMemo(
     () => (payload ? project(payload.episodes) : null),
     [payload],
   );
-  const curve: CurvePoint | undefined = payload?.retention_curve.find(
-    (row) => row.k === k,
-  );
+  const indexed = payload?.retention_curve[k - 1];
+  const curve: CurvePoint | undefined =
+    indexed?.k === k
+      ? indexed
+      : payload?.retention_curve.find((row) => row.k === k);
   const selected = payload?.episodes.find((e) => e.id === selectedId);
   const methods = stress
     ? payload?.stress.methods
@@ -114,18 +119,27 @@ export default function App() {
           <p>{payload.meta.formula}</p>
         </div>
         <div className="slider-block">
-          <label htmlFor="retention">Retention</label>
-          <input
-            id="retention"
-            type="range"
-            min={payload.meta.primary_budget}
-            max={1}
-            step={0.01}
-            value={fraction}
-            disabled={stress}
-            onChange={(ev) => setFraction(Number(ev.target.value))}
-          />
-          <span>{Math.round(fraction * 100)}%</span>
+          <div className="slider-head">
+            <label htmlFor="budget">Training budget</label>
+            <span className="slider-value">{percent}%</span>
+          </div>
+          <div className="slider-track">
+            <span>{BUDGET_MIN}%</span>
+            <input
+              id="budget"
+              type="range"
+              min={BUDGET_MIN}
+              max={BUDGET_MAX}
+              step={1}
+              value={percent}
+              aria-valuemin={BUDGET_MIN}
+              aria-valuemax={BUDGET_MAX}
+              aria-valuenow={percent}
+              aria-label="Training budget"
+              onChange={(ev) => setPercent(Number(ev.target.value))}
+            />
+            <span>{BUDGET_MAX}%</span>
+          </div>
         </div>
       </header>
 
@@ -149,25 +163,21 @@ export default function App() {
                 <g key={ep.id}>
                   {ep.role ? (
                     <circle
+                      className={retained ? "mark" : "mark drop"}
                       cx={cx}
                       cy={cy}
                       r={11}
-                      fill="none"
-                      stroke="#1c1914"
-                      strokeWidth={0.6}
-                      opacity={0.45}
                     />
                   ) : null}
                   <circle
-                    className="ep"
+                    className={[
+                      "ep",
+                      retained ? "kept" : "drop",
+                      active ? "active" : "",
+                    ].join(" ")}
                     cx={cx}
                     cy={cy}
                     r={active ? 7.5 : 6}
-                    fill="#1c1914"
-                    opacity={retained ? 0.92 : 0.12}
-                    stroke={active ? "#1c1914" : "none"}
-                    strokeWidth={active ? 5 : 0}
-                    strokeOpacity={active ? 0.22 : 0}
                     onClick={() => setSelectedId(ep.id)}
                   />
                 </g>
@@ -295,7 +305,6 @@ export default function App() {
               className={stress ? "on" : ""}
               onClick={() => {
                 setStress(true);
-                setFraction(payload.meta.primary_budget);
               }}
             >
               Stress test
