@@ -223,6 +223,7 @@ export default function App() {
   const [percent, setPercent] = useState(BUDGET_DEFAULT);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [stress, setStress] = useState(false);
+  const [scoreOpen, setScoreOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -328,7 +329,15 @@ export default function App() {
       <header className="top">
         <div className="brand">
           <h1>EgoSelect</h1>
-          <p>{payload.meta.formula}</p>
+          <button
+            type="button"
+            className={scoreOpen ? "score-toggle on" : "score-toggle"}
+            aria-expanded={scoreOpen}
+            aria-controls="score-layer"
+            onClick={() => setScoreOpen((open) => !open)}
+          >
+            Training Value Score
+          </button>
         </div>
         <div className="slider-block">
           <div className="slider-head">
@@ -359,6 +368,39 @@ export default function App() {
           </div>
         </div>
       </header>
+
+      {scoreOpen ? (
+        <>
+          <button
+            type="button"
+            className="score-scrim"
+            aria-label="Close training value score"
+            onClick={() => setScoreOpen(false)}
+          />
+          <div
+            id="score-layer"
+            className="score-layer"
+            role="dialog"
+            aria-label="Training value score"
+          >
+            <p className="score-formula">{payload.meta.formula}</p>
+            <dl>
+              <div>
+                <dt>Quality</dt>
+                <dd>{payload.meta.weights.alpha.toFixed(2)}</dd>
+              </div>
+              <div>
+                <dt>Coverage gain</dt>
+                <dd>{payload.meta.weights.beta.toFixed(2)}</dd>
+              </div>
+              <div>
+                <dt>Redundancy</dt>
+                <dd>−{payload.meta.weights.gamma.toFixed(2)}</dd>
+              </div>
+            </dl>
+          </div>
+        </>
+      ) : null}
 
       <div className="stage">
         <div className="field">
