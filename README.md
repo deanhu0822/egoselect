@@ -1,68 +1,70 @@
 # EgoSelect
 
-Capability-aware training-value curation for EgoVerse.
-Link to slide: https://gamma.app/docs/Keep-30-of-the-data-Keep-the-region-coverage-qodfuf4zzznz8q7?mode=doc
-## Problem
+> **Capability-aware training-value curation for EgoVerse.**  
+> Select the most informative demonstration episodes to maximize coverage and quality while minimizing redundancy under compute budgets.
 
-Which demonstrations are worth spending training compute on? EgoVerse mixes useful motion with near-duplicates and idle-heavy episodes. This project ranks episodes by **marginal training value**. It does not train a policy and does not claim downstream improvement.
+[![Demo Video](https://img.shields.io/badge/YouTube-Watch%20Demo-red?logo=youtube)](https://www.youtube.com/watch?v=iOxlZ7C8pBA)
+[![Project Slides](https://img.shields.io/badge/Gamma-Project%20Slides-blueviolet)](https://gamma.app/docs/Keep-30-of-the-data-Keep-the-region-coverage-qodfuf4zzznz8q7?mode=doc)
 
-## Method
+---
 
-Greedy selection over multimodal episode embeddings `z_i` (DINOv2 visual PCA + standardized motion). After each pick, remaining candidates are rescored against the updated set `S`. SQL labels are not used for scoring.
+## 📺 Demo & Resources
 
-## Formula
+- **Video Walkthrough:** [Watch the Demo on YouTube](https://www.youtube.com/watch?v=iOxlZ7C8pBA)
+- **Slide Deck:** [Keep 30% of the data, keep region coverage (Gamma Deck)](https://gamma.app/docs/Keep-30-of-the-data-Keep-the-region-coverage-qodfuf4zzznz8q7?mode=doc)
 
-```
-Value(i | S) = 0.35·Quality(i) + 0.45·CoverageGain(i | S) − 0.20·Redundancy(i | S)
-```
+---
 
-- **Quality:** valid frames, completeness, finite pose, non-stationary content, temporal validity
-- **CoverageGain:** new region + distance to `S` + underrepresented-region bonus
-- **Redundancy:** max cosine similarity to `S`
+## 💡 Overview & Problem
 
-## Architecture
+**Which demonstrations are actually worth spending training compute on?**
 
-```
-EgoVerse SQL/S3 → local zarr cache
-  → features (DINOv2 + motion + quality)
-  → z_i + 2D PCA + representation-space regions
-  → greedy EgoSelect ranking
-  → equal-budget baselines + feature-layer corruption
-  → demo_payload.json
-  → one-screen React / Vite / SVG frontend (no API)
-```
+EgoVerse datasets contain rich multimodal motion but are often polluted with near-duplicate runs and idle-heavy sequences. **EgoSelect** ranks and filters episodes based on their **marginal training value** relative to already-selected data.
 
-## Validation
+> **Note:** This framework focuses strictly on data curation and representation coverage. It does not train policies directly and makes no downstream policy performance claims.
 
-Four methods, same keep counts (8 / 24 / 40). Primary budget **24 / 80 (30%)**. Corruption injects duplicates, idle-heavy, and overrepresented-region rows at the feature layer only.
+---
 
-## Measured result
+## ⚙️ Methodology
 
-At 30% keep, EgoSelect is **not uniformly best**.
+EgoSelect runs an iterative greedy selection process over multimodal episode embeddings $z_i$ (combining DINOv2 visual PCA and standardized motion features). 
 
-| Method | Coverage | Quality | Redundancy | Injected retained |
-| --- | ---: | ---: | ---: | ---: |
-| EgoSelect | 1.000 | 0.999 | 0.406 | **3 / 24** |
-| Dedup | 1.000 | 0.995 | **0.377** | 4 / 24 |
-| Diversity | 1.000 | 0.993 | 0.485 | 7 / 24 |
-| Random | 0.833 | 0.995 | 0.534 | 8 / 24 |
+After each episode is selected into active subset $\mathcal{S}$, all remaining candidate episodes are rescored against $\mathcal{S}$. *No SQL ground-truth labels are used during scoring.*
 
-EgoSelect matches full region coverage, highest mean quality, and fewest injected items. Dedup has lower redundancy. Random misses a region.
+### Objective Function
 
-## How to run
+$$\text{Value}(i \mid \mathcal{S}) = 0.35 \cdot \text{Quality}(i) + 0.45 \cdot \text{CoverageGain}(i \mid \mathcal{S}) - 0.20 \cdot \text{Redundancy}(i \mid \mathcal{S})$$
 
-```bash
-source .venv/bin/activate
-python scripts/audit_data.py --sample          # SQL cohort
-python scripts/build_features.py --no-sync     # cached zarrs
-python scripts/run_selection.py
-python scripts/run_experiment.py
-python scripts/export_demo.py
-cd web && npm install && npm run dev           # http://localhost:5173
-```
+| Component | Description |
+| :--- | :--- |
+| **Quality** | Frame validity, completeness, finite pose checks, non-stationary movement ratio, and temporal consistency. |
+| **CoverageGain** | Discovery of new feature regions, representation distance to existing subset $\mathcal{S}$, and underrepresented-region bonuses. |
+| **Redundancy** | Maximum cosine similarity between candidate $i$ and any item in selected subset $\mathcal{S}$. |
 
-Frontend reads only `/data/demo_payload.json`. If that file is missing, generate it with `python scripts/export_demo.py`.
+---
 
-## Limitations
+## 🏗️ Architecture Pipeline
 
-Quality is weakly discriminative on this clean cohort (0.971–1.000). Motion-coverage saturates. Region 0 has only 3 episodes. Corruption is synthetic. Coverage here is representation-space region coverage, not semantic skill coverage, and not a claim about trained-policy performance.
+```text
+EgoVerse (SQL / S3)
+       │
+       ▼
+Local Zarr Cache
+       │
+       ▼
+Feature Extraction (DINOv2 + Motion Dynamics + Quality Checks)
+       │
+       ▼
+Embedding Space z_i (2D PCA + Representation Regions)
+       │
+       ▼
+Greedy EgoSelect Ranking (Dynamic Rescoring Loop)
+       │
+       ▼
+Benchmark Evaluation (Equal-budget baselines + Synthetic feature corruption)
+       │
+       ▼
+Payload Export (demo_payload.json)
+       │
+       ▼
+Static Visualizer (React + Vite + SVG Canvas / Zero-API)
