@@ -28,16 +28,17 @@
 }
 
 .shell {
-  position: relative;
   display: grid;
   grid-template-rows: 84px 1fr 168px;
   padding: 26px 44px 20px;
   overflow: hidden;
 }
 
+.shell.score-open {
+  grid-template-rows: 84px auto 1fr 168px;
+}
+
 .top {
-  position: relative;
-  z-index: 5;
   display: grid;
   grid-template-columns: minmax(240px, 0.55fr) minmax(420px, 1fr);
   align-items: end;
@@ -79,47 +80,46 @@
   box-shadow: inset 0 -1px 0 #1c1914;
 }
 
-.score-scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: default;
+.score-toggle.on::after {
+  content: " ▴";
 }
 
 .score-layer {
-  position: absolute;
-  top: 110px;
-  left: 44px;
-  right: 44px;
-  z-index: 4;
-  background: #ece7db;
-  padding: 8px 0 26px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(128px, 0.36fr));
+  gap: 8px;
+  min-height: 0;
+  padding: 12px 0 16px;
   border-bottom: 1px solid #c9c1b2;
 }
 
+.score-formula,
+.score-layer dl div {
+  margin: 0;
+  min-height: 92px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: #2a261f;
+  color: #ece7db;
+}
+
 .score-formula {
-  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 22px;
+  font-size: 20px;
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .score-layer dl {
-  display: grid;
-  grid-template-columns: repeat(3, max-content);
-  gap: 8px 36px;
-  margin: 0;
+  display: contents;
 }
 
 .score-layer dl div {
   display: grid;
-  grid-template-columns: auto auto;
-  align-items: baseline;
-  gap: 14px;
+  align-content: space-between;
+  background: #332e26;
 }
 
 .score-layer dt {
@@ -128,15 +128,17 @@
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #8a8478;
+  color: #b8afa0;
 }
 
 .score-layer dd {
   margin: 0;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   font-variant-numeric: tabular-nums;
-  font-size: 18px;
-  letter-spacing: -0.02em;
+  font-size: 28px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #f3eee4;
 }
 
 .slider-block {
@@ -434,9 +436,9 @@
 
 .bottom {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 28px;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: stretch;
   padding-top: 14px;
   border-top: 1px solid #c9c1b2;
   min-height: 0;
@@ -519,17 +521,54 @@
 .curve-block {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
   min-height: 0;
+  padding: 12px 14px 10px;
+  border-radius: 12px;
+  background: #2a261f;
+  color: #ece7db;
+}
+
+.curve-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .curve-block .k {
+  margin: 0;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #8a8478;
+  color: #b8afa0;
+}
+
+.curve-read {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+}
+
+.curve-read b {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #f3eee4;
+}
+
+.curve-read span {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9a9184;
 }
 
 .curve-block svg {
@@ -540,15 +579,15 @@
 
 .curve-grid {
   fill: none;
-  stroke: #c9c1b2;
+  stroke: #4a443a;
   stroke-width: 0.6;
 }
 
 .curve-now {
   fill: none;
-  stroke: #1c1914;
+  stroke: #ece7db;
   stroke-width: 0.7;
-  stroke-opacity: 0.22;
+  stroke-opacity: 0.28;
 }
 
 .curve-line {
@@ -558,32 +597,32 @@
 }
 
 .curve-line.rand {
-  stroke: #b7b0a3;
+  stroke: #6f685c;
   stroke-width: 1.05;
   stroke-dasharray: 1.6 2.2;
 }
 
 .curve-line.dedup {
-  stroke: #8a8478;
+  stroke: #8d8578;
   stroke-width: 1.1;
   stroke-dasharray: 5 3;
 }
 
 .curve-line.div {
-  stroke: #6f6a60;
+  stroke: #a89f90;
   stroke-width: 1.1;
   stroke-dasharray: 2.2 2;
 }
 
 .curve-line.ego {
-  stroke: #1c1914;
-  stroke-width: 1.35;
+  stroke: #f3eee4;
+  stroke-width: 1.6;
 }
 
 .curve-tick {
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 8px;
-  fill: #8a8478;
+  fill: #9a9184;
   letter-spacing: 0.04em;
 }
 
@@ -595,11 +634,11 @@
   font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8a8478;
+  color: #8a8276;
 }
 
 .curve-legend .ego {
-  color: #1c1914;
+  color: #f3eee4;
 }
 
 .toggle {

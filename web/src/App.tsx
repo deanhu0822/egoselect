@@ -19,8 +19,6 @@ const BUDGET_DEFAULT = 30;
 const CURVE_W = 300;
 const CURVE_H = 148;
 const CURVE_PAD = { l: 26, r: 8, t: 8, b: 24 };
-const DEFAULT_SWEEP = [0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1];
-
 function budgetCount(n: number, fraction: number): number {
   return Math.max(1, Math.min(n, Math.round(n * fraction)));
 }
@@ -112,17 +110,27 @@ function HeldOut({
 function CoverageChart({
   series,
   percent,
-  sweep,
 }: {
   series: MethodCurve[];
   percent: number;
-  sweep: number[];
 }) {
   const nowX = curveX(percent / 100);
-  const ticks = sweep.map((frac) => Math.round(frac * 100));
+  const ticks = [10, 30, 50, 100];
+  const ego = series.find((curve) => curve.name === "EgoSelect");
+  const live = ego
+    ? pointAt(ego, budgetCount(ego.points.length, percent / 100))
+    : undefined;
   return (
     <div className="curve-block">
-      <p className="k">Coverage vs training budget</p>
+      <div className="curve-head">
+        <p className="k">Coverage vs training budget</p>
+        {live ? (
+          <p className="curve-read">
+            <b>{fmt(live.coverage, 2)}</b>
+            <span>at {percent}%</span>
+          </p>
+        ) : null}
+      </div>
       <svg
         viewBox={`0 0 ${CURVE_W} ${CURVE_H}`}
         role="img"
@@ -322,10 +330,8 @@ export default function App() {
         "min",
       )
     : compared.map(() => false);
-  const sweep = payload.meta.sweep?.length ? payload.meta.sweep : DEFAULT_SWEEP;
-
   return (
-    <div className="shell">
+    <div className={scoreOpen ? "shell score-open" : "shell"}>
       <header className="top">
         <div className="brand">
           <h1>EgoSelect</h1>
@@ -370,36 +376,23 @@ export default function App() {
       </header>
 
       {scoreOpen ? (
-        <>
-          <button
-            type="button"
-            className="score-scrim"
-            aria-label="Close training value score"
-            onClick={() => setScoreOpen(false)}
-          />
-          <div
-            id="score-layer"
-            className="score-layer"
-            role="dialog"
-            aria-label="Training value score"
-          >
-            <p className="score-formula">{payload.meta.formula}</p>
-            <dl>
-              <div>
-                <dt>Quality</dt>
-                <dd>{payload.meta.weights.alpha.toFixed(2)}</dd>
-              </div>
-              <div>
-                <dt>Coverage gain</dt>
-                <dd>{payload.meta.weights.beta.toFixed(2)}</dd>
-              </div>
-              <div>
-                <dt>Redundancy</dt>
-                <dd>−{payload.meta.weights.gamma.toFixed(2)}</dd>
-              </div>
-            </dl>
-          </div>
-        </>
+        <div id="score-layer" className="score-layer">
+          <p className="score-formula">{payload.meta.formula}</p>
+          <dl>
+            <div>
+              <dt>Quality</dt>
+              <dd>{payload.meta.weights.alpha.toFixed(2)}</dd>
+            </div>
+            <div>
+              <dt>Coverage gain</dt>
+              <dd>{payload.meta.weights.beta.toFixed(2)}</dd>
+            </div>
+            <div>
+              <dt>Redundancy</dt>
+              <dd>−{payload.meta.weights.gamma.toFixed(2)}</dd>
+            </div>
+          </dl>
+        </div>
       ) : null}
 
       <div className="stage">
@@ -599,7 +592,7 @@ export default function App() {
             </button>
           </div>
         </div>
-        <CoverageChart series={methodCurves} percent={percent} sweep={sweep} />
+        <CoverageChart series={methodCurves} percent={percent} />
       </footer>
     </div>
   );
