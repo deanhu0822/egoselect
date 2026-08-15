@@ -1,0 +1,324 @@
+.missing,
+.shell {
+  width: 1440px;
+  height: 900px;
+  margin: 0 auto;
+  background: #ece7db;
+}
+
+.missing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 120px;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.missing p {
+  margin: 0 0 18px;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.missing code {
+  display: block;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.shell {
+  display: grid;
+  grid-template-rows: 92px 1fr 196px;
+  padding: 28px 44px 24px;
+  overflow: hidden;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 560px;
+  align-items: end;
+  gap: 48px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #c9c1b2;
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.brand p {
+  margin: 8px 0 0;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  color: #6f6a60;
+  letter-spacing: 0.01em;
+}
+
+.slider-block {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 6px;
+}
+
+.slider-block label,
+.slider-block span {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  color: #6f6a60;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.slider-block input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  background: #1c1914;
+  outline: none;
+}
+
+.slider-block input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1c1914;
+  cursor: pointer;
+}
+
+.slider-block input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: #1c1914;
+  cursor: pointer;
+}
+
+.slider-block input[type="range"]:disabled {
+  opacity: 0.35;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: 1fr 292px;
+  min-height: 0;
+}
+
+.field {
+  position: relative;
+  min-width: 0;
+}
+
+.field svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.field caption,
+.axis {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  fill: #8a8478;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ep {
+  cursor: pointer;
+  transition: opacity 120ms linear;
+}
+
+.inspector {
+  padding: 28px 0 12px 36px;
+  border-left: 1px solid #c9c1b2;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.inspector .idle {
+  margin-top: 72px;
+  color: #8a8478;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.inspector .id {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.inspector .verdict {
+  margin: 10px 0 22px;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.inspector .verdict.drop {
+  color: #8a8478;
+}
+
+.stats {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stats div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.stats dt {
+  margin: 0;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.stats dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.why-label {
+  margin: 0 0 8px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.why {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+}
+
+.bottom {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #c9c1b2;
+}
+
+.live {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.live .k {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.live .v {
+  margin-top: 4px;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: end;
+}
+
+.methods {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.method .name {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+  padding-bottom: 8px;
+  border-bottom: 1px solid transparent;
+}
+
+.method.ego .name {
+  color: #1c1914;
+  border-bottom-color: #1c1914;
+}
+
+.method .nums {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 14px;
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.method .nums span {
+  color: #6f6a60;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.method .nums b {
+  font-weight: 500;
+  color: #1c1914;
+}
+
+.toggle {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 2px;
+}
+
+.toggle button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.toggle button.on {
+  color: #1c1914;
+  box-shadow: inset 0 -1px 0 #1c1914;
+}

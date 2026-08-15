@@ -6,7 +6,7 @@ __pycache__/
 
 # EgoVerse checkout and local episode cache (do not vendor)
 third_party/
-data/
+/data/
 
 # Secrets must never be committed
 .env
@@ -15,3 +15,7 @@ data/
 # Large generated tables
 outputs/episode_table.parquet
 outputs/*.zarr
+
+# Frontend
+web/node_modules/
+web/dist/
