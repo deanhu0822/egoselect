@@ -15,8 +15,8 @@
     "greedy_recomputed": true,
     "keep_example": "692e90f07641010d043544f1",
     "drop_example": "692f13d3f59fd218b1be026e",
-    "keep_reason": "High quality (1.000); Underrepresented region 4",
-    "drop_reason": "Region already represented; High stationary content (19%)",
+    "keep_reason": "Underrepresented behavior; High quality",
+    "drop_reason": "Behavior already represented; 19% stationary",
     "headline": "At 30% keep, EgoSelect matches full region coverage with the fewest injected corruptions; Dedup-only has lower redundancy.",
     "tasks": [
       "cup_on_saucer",
@@ -29,7 +29,38 @@
       "mecka",
       "rl2"
     ],
-    "n_rescore_passes": 80
+    "n_rescore_passes": 80,
+    "sweep": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "heldout": [
+      {
+        "key": "task",
+        "label": "Task coverage",
+        "n_labels": 5
+      },
+      {
+        "key": "scene",
+        "label": "Scene coverage",
+        "n_labels": 24
+      },
+      {
+        "key": "lab",
+        "label": "Lab coverage",
+        "n_labels": 2
+      },
+      {
+        "key": "operator",
+        "label": "Operator coverage",
+        "n_labels": 70
+      }
+    ]
   },
   "episodes": [
     {
@@ -45,7 +76,7 @@
       "nearest": "",
       "nearest_similarity": 0.0,
       "stationary": 0.0,
-      "reason": "High quality (1.000); Underrepresented region 4",
+      "reason": "Underrepresented behavior; High quality",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": "keep_example"
@@ -63,7 +94,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": -0.386184,
       "stationary": 0.002784,
-      "reason": "High quality (1.000); Underrepresented region 1; Low redundancy; Region-balance bonus (region 1)",
+      "reason": "Underrepresented behavior; High quality; Low redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -81,7 +112,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": -0.067853,
       "stationary": 0.003136,
-      "reason": "High quality (1.000); Underrepresented region 5; Low redundancy; Region-balance bonus (region 5)",
+      "reason": "Underrepresented behavior; High quality; Low redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -99,7 +130,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.018592,
       "stationary": 0.01428,
-      "reason": "High quality (0.998); Underrepresented region 3; Low redundancy; Region-balance bonus (region 3)",
+      "reason": "Underrepresented behavior; High quality; Low redundancy",
       "task": "fold_clothes",
       "lab": "rl2",
       "role": null
@@ -117,7 +148,7 @@
       "nearest": "693a5768a20d70dd718c32cc",
       "nearest_similarity": -0.045477,
       "stationary": 0.017205,
-      "reason": "High quality (0.997); Underrepresented region 2; Low redundancy; Region-balance bonus (region 2)",
+      "reason": "Underrepresented behavior; High quality; Low redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -135,7 +166,7 @@
       "nearest": "69bb089c54cd0f45440771db",
       "nearest_similarity": 0.073242,
       "stationary": 0.028349,
-      "reason": "High quality (0.996); Underrepresented region 0; Low redundancy; Region-balance bonus (region 0)",
+      "reason": "Underrepresented behavior; High quality; Low redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -153,7 +184,7 @@
       "nearest": "69bb089c54cd0f45440771db",
       "nearest_similarity": 0.092475,
       "stationary": 0.001406,
-      "reason": "Region already represented; High quality (1.000); Low redundancy; Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -171,7 +202,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.216968,
       "stationary": 0.0,
-      "reason": "Region already represented; High quality (1.000); Low redundancy; Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -189,7 +220,7 @@
       "nearest": "69bb089c54cd0f45440771db",
       "nearest_similarity": 0.163505,
       "stationary": 0.003344,
-      "reason": "Region already represented; High quality (0.999); Low redundancy; Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -207,7 +238,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.205972,
       "stationary": 0.003125,
-      "reason": "Region already represented; High quality (1.000); Low redundancy; Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -225,7 +256,7 @@
       "nearest": "69b9f96927ee5763b67cb08b",
       "nearest_similarity": 0.269875,
       "stationary": 0.003614,
-      "reason": "Region already represented; High quality (0.999); Low redundancy; Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -243,7 +274,7 @@
       "nearest": "69b97d8618c008a21ec3ff37",
       "nearest_similarity": 0.222146,
       "stationary": 0.009091,
-      "reason": "Region already represented; High quality (0.999); Low redundancy; Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -261,7 +292,7 @@
       "nearest": "693a5768a20d70dd718c32cc",
       "nearest_similarity": 0.33685,
       "stationary": 0.000891,
-      "reason": "Region already represented; High quality (1.000); Low redundancy; Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -279,7 +310,7 @@
       "nearest": "69b9f96927ee5763b67cb08b",
       "nearest_similarity": 0.224654,
       "stationary": 0.026692,
-      "reason": "Region already represented; High quality (0.996); Low redundancy; Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -297,7 +328,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.396891,
       "stationary": 0.007653,
-      "reason": "Region already represented; High quality (0.999); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -315,7 +346,7 @@
       "nearest": "69b1c668e13eeef852cac8ed",
       "nearest_similarity": 0.507387,
       "stationary": 0.000668,
-      "reason": "Region already represented; High quality (1.000)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -333,7 +364,7 @@
       "nearest": "69b97d8618c008a21ec3ff37",
       "nearest_similarity": 0.331024,
       "stationary": 0.018433,
-      "reason": "Region already represented; High quality (0.997); Low redundancy; Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality; Low redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -351,7 +382,7 @@
       "nearest": "692ee08a952b26f4cc71a4cb",
       "nearest_similarity": 0.441866,
       "stationary": 0.0,
-      "reason": "Region already represented; High quality (1.000); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -369,7 +400,7 @@
       "nearest": "69b1c668e13eeef852cac8ed",
       "nearest_similarity": 0.427884,
       "stationary": 0.011824,
-      "reason": "Region already represented; High quality (0.998); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -387,7 +418,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.396913,
       "stationary": 0.015464,
-      "reason": "Region already represented; High quality (0.998)",
+      "reason": "Behavior already represented; High quality",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -405,7 +436,7 @@
       "nearest": "2025-09-23-22-15-03-000000",
       "nearest_similarity": 0.537239,
       "stationary": 0.029688,
-      "reason": "Region already represented; High quality (0.996); Region-balance bonus (region 3)",
+      "reason": "Behavior already represented; High quality",
       "task": "fold_clothes",
       "lab": "rl2",
       "role": null
@@ -423,7 +454,7 @@
       "nearest": "693a5768a20d70dd718c32cc",
       "nearest_similarity": 0.397522,
       "stationary": 0.016406,
-      "reason": "Region already represented; High quality (0.998); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -441,7 +472,7 @@
       "nearest": "69b3fc97bb2330fd692792ba",
       "nearest_similarity": 0.406894,
       "stationary": 0.008224,
-      "reason": "Region already represented; High quality (0.999); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -459,7 +490,7 @@
       "nearest": "69b9f96927ee5763b67cb08b",
       "nearest_similarity": 0.500329,
       "stationary": 0.002413,
-      "reason": "Region already represented; High quality (1.000)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -477,7 +508,7 @@
       "nearest": "69b9db2d66541bb0435c0709",
       "nearest_similarity": 0.517802,
       "stationary": 0.015083,
-      "reason": "Region already represented; High quality (0.998); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -495,7 +526,7 @@
       "nearest": "69b9f96927ee5763b67cb08b",
       "nearest_similarity": 0.411693,
       "stationary": 0.036232,
-      "reason": "Region already represented; High quality (0.995); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -513,7 +544,7 @@
       "nearest": "693a3895b40b697e3cd77f34",
       "nearest_similarity": 0.556101,
       "stationary": 0.013078,
-      "reason": "Region already represented; High quality (0.998); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -531,7 +562,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.559762,
       "stationary": 0.006369,
-      "reason": "Region already represented; High quality (0.999)",
+      "reason": "Behavior already represented; High quality",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -549,7 +580,7 @@
       "nearest": "69bb089c54cd0f45440771db",
       "nearest_similarity": 0.595358,
       "stationary": 0.000223,
-      "reason": "Region already represented; High quality (1.000); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -567,7 +598,7 @@
       "nearest": "2025-10-29-21-59-41-062000",
       "nearest_similarity": 0.795751,
       "stationary": 0.013142,
-      "reason": "80% similar to 2025-10-29-21-59-41-062000; Region already represented; High quality (0.998); Region-balance bonus (region 3)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "fold_clothes",
       "lab": "rl2",
       "role": null
@@ -585,7 +616,7 @@
       "nearest": "693a3895b40b697e3cd77f34",
       "nearest_similarity": 0.464429,
       "stationary": 0.026071,
-      "reason": "Region already represented; High quality (0.996); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -603,7 +634,7 @@
       "nearest": "692eae813019385fbbf5686f",
       "nearest_similarity": 0.557684,
       "stationary": 0.021277,
-      "reason": "Region already represented; High quality (0.997)",
+      "reason": "Behavior already represented; High quality",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -621,7 +652,7 @@
       "nearest": "693a5768a20d70dd718c32cc",
       "nearest_similarity": 0.620683,
       "stationary": 0.006235,
-      "reason": "Region already represented; High quality (0.999); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -639,7 +670,7 @@
       "nearest": "69bb089c54cd0f45440771db",
       "nearest_similarity": 0.608162,
       "stationary": 0.001499,
-      "reason": "Region already represented; High quality (1.000); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -657,7 +688,7 @@
       "nearest": "2025-09-26-19-08-33-000000",
       "nearest_similarity": 0.734499,
       "stationary": 0.032871,
-      "reason": "73% similar to 2025-09-26-19-08-33-000000; Region already represented; High quality (0.995); Region-balance bonus (region 3)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "fold_clothes",
       "lab": "rl2",
       "role": null
@@ -675,7 +706,7 @@
       "nearest": "696bc82c476e9a6e777ffe77",
       "nearest_similarity": 0.643874,
       "stationary": 0.004878,
-      "reason": "Region already represented; High quality (0.999); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -693,7 +724,7 @@
       "nearest": "69b97d8618c008a21ec3ff37",
       "nearest_similarity": 0.674101,
       "stationary": 0.0,
-      "reason": "Region already represented; High quality (1.000); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -711,7 +742,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.671537,
       "stationary": 0.002865,
-      "reason": "Region already represented; High quality (1.000); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -729,7 +760,7 @@
       "nearest": "69b953bc6be1c6d054a43369",
       "nearest_similarity": 0.625528,
       "stationary": 0.016917,
-      "reason": "Region already represented; High quality (0.997); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -747,7 +778,7 @@
       "nearest": "692ea1c5a0e165ab2e42e43e",
       "nearest_similarity": 0.622859,
       "stationary": 0.017167,
-      "reason": "Region already represented; High quality (0.997)",
+      "reason": "Behavior already represented; High quality",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -765,7 +796,7 @@
       "nearest": "2025-09-23-22-15-03-000000",
       "nearest_similarity": 0.68621,
       "stationary": 0.041389,
-      "reason": "Region already represented; Region-balance bonus (region 3)",
+      "reason": "Behavior already represented",
       "task": "cup_on_saucer",
       "lab": "rl2",
       "role": null
@@ -783,7 +814,7 @@
       "nearest": "2025-09-23-22-15-03-000000",
       "nearest_similarity": 0.829014,
       "stationary": 0.022032,
-      "reason": "83% similar to 2025-09-23-22-15-03-000000; Region already represented; High quality (0.997); Region-balance bonus (region 3)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "cup_on_saucer",
       "lab": "rl2",
       "role": null
@@ -801,7 +832,7 @@
       "nearest": "69b8d71f0dc8a1a65089bd58",
       "nearest_similarity": 0.617015,
       "stationary": 0.010073,
-      "reason": "Region already represented; High quality (0.998); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -819,7 +850,7 @@
       "nearest": "69b953bc6be1c6d054a43369",
       "nearest_similarity": 0.703389,
       "stationary": 0.009426,
-      "reason": "70% similar to 69b953bc6be1c6d054a43369; Region already represented; High quality (0.999); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -837,7 +868,7 @@
       "nearest": "69b97d8618c008a21ec3ff37",
       "nearest_similarity": 0.713044,
       "stationary": 0.002595,
-      "reason": "71% similar to 69b97d8618c008a21ec3ff37; Region already represented; High quality (1.000); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -855,7 +886,7 @@
       "nearest": "69b3fc97bb2330fd692792ba",
       "nearest_similarity": 0.667228,
       "stationary": 0.003963,
-      "reason": "Region already represented; High quality (0.999)",
+      "reason": "Behavior already represented; High quality",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -873,7 +904,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.78951,
       "stationary": 0.0,
-      "reason": "79% similar to 692e90f07641010d043544f1; Region already represented; High quality (1.000); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -891,7 +922,7 @@
       "nearest": "69b8d71f0dc8a1a65089bd58",
       "nearest_similarity": 0.743273,
       "stationary": 0.001719,
-      "reason": "74% similar to 69b8d71f0dc8a1a65089bd58; Region already represented; High quality (1.000)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -909,7 +940,7 @@
       "nearest": "693a315dc3de433d918263c8",
       "nearest_similarity": 0.77893,
       "stationary": 0.007271,
-      "reason": "78% similar to 693a315dc3de433d918263c8; Region already represented; High quality (0.999); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -927,7 +958,7 @@
       "nearest": "2025-09-26-19-08-33-000000",
       "nearest_similarity": 0.719861,
       "stationary": 0.057743,
-      "reason": "72% similar to 2025-09-26-19-08-33-000000; Region already represented; Region-balance bonus (region 3)",
+      "reason": "Behavior already represented; High redundancy",
       "task": "cup_on_saucer",
       "lab": "rl2",
       "role": null
@@ -945,7 +976,7 @@
       "nearest": "692ee10d45175992cd6a0bed",
       "nearest_similarity": 0.649871,
       "stationary": 0.033199,
-      "reason": "Region already represented; High quality (0.995); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -963,7 +994,7 @@
       "nearest": "692ee10d45175992cd6a0bed",
       "nearest_similarity": 0.334416,
       "stationary": 0.099366,
-      "reason": "Region already represented; Low redundancy; Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; Low redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -981,7 +1012,7 @@
       "nearest": "692edad89ca48e15a25b2957",
       "nearest_similarity": 0.816128,
       "stationary": 0.006281,
-      "reason": "82% similar to 692edad89ca48e15a25b2957; Region already represented; High quality (0.999); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -999,7 +1030,7 @@
       "nearest": "69b686597c2e4161f098b727",
       "nearest_similarity": 0.778525,
       "stationary": 0.002784,
-      "reason": "78% similar to 69b686597c2e4161f098b727; Region already represented; High quality (1.000)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -1017,7 +1048,7 @@
       "nearest": "6971e9f19306036c2689d773",
       "nearest_similarity": 0.592663,
       "stationary": 0.053099,
-      "reason": "Region already represented; Region-balance bonus (region 5)",
+      "reason": "Behavior already represented",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1035,7 +1066,7 @@
       "nearest": "692e90f07641010d043544f1",
       "nearest_similarity": 0.832355,
       "stationary": 0.0,
-      "reason": "83% similar to 692e90f07641010d043544f1; Region already represented; High quality (1.000)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -1053,7 +1084,7 @@
       "nearest": "69b94bf0a531a44181730103",
       "nearest_similarity": 0.648833,
       "stationary": 0.036541,
-      "reason": "Region already represented; High quality (0.995); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -1071,7 +1102,7 @@
       "nearest": "6971e9f19306036c2689d773",
       "nearest_similarity": 0.633671,
       "stationary": 0.039617,
-      "reason": "Region already represented; Region-balance bonus (region 5)",
+      "reason": "Behavior already represented",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1089,7 +1120,7 @@
       "nearest": "69b36fff97fe745bf0602315",
       "nearest_similarity": 0.817172,
       "stationary": 0.02193,
-      "reason": "82% similar to 69b36fff97fe745bf0602315; Region already represented; High quality (0.997); Region-balance bonus (region 0)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -1107,7 +1138,7 @@
       "nearest": "69baf9bed1413a767f2ec0cd",
       "nearest_similarity": 0.81604,
       "stationary": 0.001743,
-      "reason": "82% similar to 69baf9bed1413a767f2ec0cd; Region already represented; High quality (1.000)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -1125,7 +1156,7 @@
       "nearest": "6971e9f19306036c2689d773",
       "nearest_similarity": 0.763142,
       "stationary": 0.027498,
-      "reason": "76% similar to 6971e9f19306036c2689d773; Region already represented; High quality (0.996); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1143,7 +1174,7 @@
       "nearest": "692edad89ca48e15a25b2957",
       "nearest_similarity": 0.713332,
       "stationary": 0.031193,
-      "reason": "71% similar to 692edad89ca48e15a25b2957; Region already represented; High quality (0.995); Region-balance bonus (region 4)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -1161,7 +1192,7 @@
       "nearest": "6971e9f19306036c2689d773",
       "nearest_similarity": 0.718828,
       "stationary": 0.038509,
-      "reason": "72% similar to 6971e9f19306036c2689d773; Region already represented; High quality (0.994); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1179,7 +1210,7 @@
       "nearest": "692e771c39719ab57395b408",
       "nearest_similarity": 0.698227,
       "stationary": 0.048128,
-      "reason": "Region already represented",
+      "reason": "Behavior already represented",
       "task": "fold_clothes",
       "lab": "mecka",
       "role": null
@@ -1197,7 +1228,7 @@
       "nearest": "69b9db2d66541bb0435c0709",
       "nearest_similarity": 0.879237,
       "stationary": 0.007795,
-      "reason": "88% similar to 69b9db2d66541bb0435c0709; Region already represented; High quality (0.999); Region-balance bonus (region 1)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "dishwashing",
       "lab": "mecka",
       "role": null
@@ -1215,7 +1246,7 @@
       "nearest": "692ee08a952b26f4cc71a4cb",
       "nearest_similarity": 0.617825,
       "stationary": 0.067797,
-      "reason": "Region already represented",
+      "reason": "Behavior already represented",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -1233,7 +1264,7 @@
       "nearest": "696eccaa54df4cd3f89ae845",
       "nearest_similarity": 0.424919,
       "stationary": 0.106042,
-      "reason": "Region already represented; High stationary content (11%); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; 11% stationary",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -1251,7 +1282,7 @@
       "nearest": "693a315dc3de433d918263c8",
       "nearest_similarity": 0.784745,
       "stationary": 0.03605,
-      "reason": "78% similar to 693a315dc3de433d918263c8; Region already represented; High quality (0.995); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1269,7 +1300,7 @@
       "nearest": "692ea1c5a0e165ab2e42e43e",
       "nearest_similarity": 0.661194,
       "stationary": 0.057353,
-      "reason": "Region already represented",
+      "reason": "Behavior already represented",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -1287,7 +1318,7 @@
       "nearest": "69b845dfc5ab7070deca47a4",
       "nearest_similarity": 0.890488,
       "stationary": 0.024902,
-      "reason": "89% similar to 69b845dfc5ab7070deca47a4; Region already represented; High quality (0.996); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -1305,7 +1336,7 @@
       "nearest": "692ea95fc609aae267b27993",
       "nearest_similarity": 0.761994,
       "stationary": 0.049505,
-      "reason": "76% similar to 692ea95fc609aae267b27993; Region already represented",
+      "reason": "Behavior already represented; High redundancy",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -1323,7 +1354,7 @@
       "nearest": "692ee02d4215b056bf36e786",
       "nearest_similarity": 0.761517,
       "stationary": 0.055838,
-      "reason": "76% similar to 692ee02d4215b056bf36e786; Region already represented",
+      "reason": "Behavior already represented; High redundancy",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -1341,7 +1372,7 @@
       "nearest": "2026-01-20-20-21-15-271000",
       "nearest_similarity": 0.756732,
       "stationary": 0.099924,
-      "reason": "76% similar to 2026-01-20-20-21-15-271000; Region already represented; Region-balance bonus (region 3)",
+      "reason": "Behavior already represented; High redundancy",
       "task": "cup_on_saucer",
       "lab": "rl2",
       "role": null
@@ -1359,7 +1390,7 @@
       "nearest": "696bb86da8cba78d3b5a5111",
       "nearest_similarity": 0.91183,
       "stationary": 0.034955,
-      "reason": "91% similar to 696bb86da8cba78d3b5a5111; Region already represented; High quality (0.995); Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High quality; High redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1377,7 +1408,7 @@
       "nearest": "692ea1c5a0e165ab2e42e43e",
       "nearest_similarity": 0.805771,
       "stationary": 0.055838,
-      "reason": "81% similar to 692ea1c5a0e165ab2e42e43e; Region already represented",
+      "reason": "Behavior already represented; High redundancy",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -1395,7 +1426,7 @@
       "nearest": "69b36fff97fe745bf0602315",
       "nearest_similarity": 0.753126,
       "stationary": 0.098277,
-      "reason": "75% similar to 69b36fff97fe745bf0602315; Region already represented; Region-balance bonus (region 0)",
+      "reason": "Behavior already represented; High redundancy",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -1413,7 +1444,7 @@
       "nearest": "69b9b2169fd2f95542baefa7",
       "nearest_similarity": 0.472949,
       "stationary": 0.153675,
-      "reason": "Region already represented; High stationary content (15%); Region-balance bonus (region 2)",
+      "reason": "Behavior already represented; 15% stationary",
       "task": "ironing_clothes",
       "lab": "mecka",
       "role": null
@@ -1431,7 +1462,7 @@
       "nearest": "692e9858af371a654ce7fc3f",
       "nearest_similarity": 0.555675,
       "stationary": 0.139752,
-      "reason": "Region already represented; High stationary content (14%)",
+      "reason": "Behavior already represented; 14% stationary",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": null
@@ -1449,7 +1480,7 @@
       "nearest": "696bd7d2f7b3293476cab9eb",
       "nearest_similarity": 0.956894,
       "stationary": 0.068008,
-      "reason": "96% similar to 696bd7d2f7b3293476cab9eb; Region already represented; Region-balance bonus (region 5)",
+      "reason": "Behavior already represented; High redundancy",
       "task": "potting_plants",
       "lab": "mecka",
       "role": null
@@ -1467,7 +1498,7 @@
       "nearest": "692ed8c1f2e4e72c033b998c",
       "nearest_similarity": 0.682115,
       "stationary": 0.194595,
-      "reason": "Region already represented; High stationary content (19%)",
+      "reason": "Behavior already represented; 19% stationary",
       "task": "cup_on_saucer",
       "lab": "mecka",
       "role": "drop_example"
@@ -1481,7 +1512,11 @@
       "quality": 1.0,
       "redundancy": 0.0,
       "visual_coverage": 0.3681,
-      "stationary": 0.0
+      "stationary": 0.0,
+      "task": 0.2,
+      "scene": 0.0417,
+      "lab": 0.5,
+      "operator": 0.0143
     },
     {
       "k": 2,
@@ -1490,7 +1525,11 @@
       "quality": 0.9998,
       "redundancy": -0.3862,
       "visual_coverage": 0.4864,
-      "stationary": 0.0014
+      "stationary": 0.0014,
+      "task": 0.4,
+      "scene": 0.0833,
+      "lab": 0.5,
+      "operator": 0.0286
     },
     {
       "k": 3,
@@ -1499,7 +1538,11 @@
       "quality": 0.9997,
       "redundancy": -0.1187,
       "visual_coverage": 0.5564,
-      "stationary": 0.002
+      "stationary": 0.002,
+      "task": 0.6,
+      "scene": 0.125,
+      "lab": 0.5,
+      "operator": 0.0429
     },
     {
       "k": 4,
@@ -1508,7 +1551,11 @@
       "quality": 0.9992,
       "redundancy": -0.0351,
       "visual_coverage": 0.5715,
-      "stationary": 0.005
+      "stationary": 0.005,
+      "task": 0.6,
+      "scene": 0.1667,
+      "lab": 1.0,
+      "operator": 0.0571
     },
     {
       "k": 5,
@@ -1517,7 +1564,11 @@
       "quality": 0.9989,
       "redundancy": -0.0347,
       "visual_coverage": 0.5899,
-      "stationary": 0.0075
+      "stationary": 0.0075,
+      "task": 0.8,
+      "scene": 0.2083,
+      "lab": 1.0,
+      "operator": 0.0714
     },
     {
       "k": 6,
@@ -1526,7 +1577,11 @@
       "quality": 0.9984,
       "redundancy": 0.0178,
       "visual_coverage": 0.6031,
-      "stationary": 0.011
+      "stationary": 0.011,
+      "task": 0.8,
+      "scene": 0.25,
+      "lab": 1.0,
+      "operator": 0.0857
     },
     {
       "k": 7,
@@ -1535,7 +1590,11 @@
       "quality": 0.9986,
       "redundancy": 0.0318,
       "visual_coverage": 0.6192,
-      "stationary": 0.0096
+      "stationary": 0.0096,
+      "task": 0.8,
+      "scene": 0.25,
+      "lab": 1.0,
+      "operator": 0.1
     },
     {
       "k": 8,
@@ -1544,7 +1603,11 @@
       "quality": 0.9987,
       "redundancy": 0.1196,
       "visual_coverage": 0.6268,
-      "stationary": 0.0084
+      "stationary": 0.0084,
+      "task": 0.8,
+      "scene": 0.25,
+      "lab": 1.0,
+      "operator": 0.1143
     },
     {
       "k": 9,
@@ -1553,7 +1616,11 @@
       "quality": 0.9988,
       "redundancy": 0.1402,
       "visual_coverage": 0.6334,
-      "stationary": 0.0078
+      "stationary": 0.0078,
+      "task": 0.8,
+      "scene": 0.2917,
+      "lab": 1.0,
+      "operator": 0.1286
     },
     {
       "k": 10,
@@ -1562,7 +1629,11 @@
       "quality": 0.9989,
       "redundancy": 0.1468,
       "visual_coverage": 0.6674,
-      "stationary": 0.0074
+      "stationary": 0.0074,
+      "task": 1.0,
+      "scene": 0.2917,
+      "lab": 1.0,
+      "operator": 0.1429
     },
     {
       "k": 11,
@@ -1571,7 +1642,11 @@
       "quality": 0.9989,
       "redundancy": 0.1903,
       "visual_coverage": 0.677,
-      "stationary": 0.007
+      "stationary": 0.007,
+      "task": 1.0,
+      "scene": 0.3333,
+      "lab": 1.0,
+      "operator": 0.1571
     },
     {
       "k": 12,
@@ -1580,7 +1655,11 @@
       "quality": 0.9989,
       "redundancy": 0.1979,
       "visual_coverage": 0.6891,
-      "stationary": 0.0072
+      "stationary": 0.0072,
+      "task": 1.0,
+      "scene": 0.375,
+      "lab": 1.0,
+      "operator": 0.1714
     },
     {
       "k": 13,
@@ -1589,7 +1668,11 @@
       "quality": 0.999,
       "redundancy": 0.2373,
       "visual_coverage": 0.6962,
-      "stationary": 0.0067
+      "stationary": 0.0067,
+      "task": 1.0,
+      "scene": 0.4167,
+      "lab": 1.0,
+      "operator": 0.1857
     },
     {
       "k": 14,
@@ -1598,7 +1681,11 @@
       "quality": 0.9988,
       "redundancy": 0.2364,
       "visual_coverage": 0.7061,
-      "stationary": 0.0081
+      "stationary": 0.0081,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2
     },
     {
       "k": 15,
@@ -1607,7 +1694,11 @@
       "quality": 0.9988,
       "redundancy": 0.2673,
       "visual_coverage": 0.711,
-      "stationary": 0.0081
+      "stationary": 0.0081,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2143
     },
     {
       "k": 16,
@@ -1616,7 +1707,11 @@
       "quality": 0.9989,
       "redundancy": 0.3169,
       "visual_coverage": 0.7272,
-      "stationary": 0.0076
+      "stationary": 0.0076,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2286
     },
     {
       "k": 17,
@@ -1625,7 +1720,11 @@
       "quality": 0.9988,
       "redundancy": 0.3203,
       "visual_coverage": 0.732,
-      "stationary": 0.0083
+      "stationary": 0.0083,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2429
     },
     {
       "k": 18,
@@ -1634,7 +1733,11 @@
       "quality": 0.9988,
       "redundancy": 0.3381,
       "visual_coverage": 0.7387,
-      "stationary": 0.0078
+      "stationary": 0.0078,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2571
     },
     {
       "k": 19,
@@ -1643,7 +1746,11 @@
       "quality": 0.9988,
       "redundancy": 0.3512,
       "visual_coverage": 0.7447,
-      "stationary": 0.008
+      "stationary": 0.008,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2714
     },
     {
       "k": 20,
@@ -1652,7 +1759,11 @@
       "quality": 0.9987,
       "redundancy": 0.3534,
       "visual_coverage": 0.7504,
-      "stationary": 0.0084
+      "stationary": 0.0084,
+      "task": 1.0,
+      "scene": 0.4583,
+      "lab": 1.0,
+      "operator": 0.2714
     },
     {
       "k": 21,
@@ -1661,7 +1772,11 @@
       "quality": 0.9986,
       "redundancy": 0.3765,
       "visual_coverage": 0.7593,
-      "stationary": 0.0094
+      "stationary": 0.0094,
+      "task": 1.0,
+      "scene": 0.5,
+      "lab": 1.0,
+      "operator": 0.2857
     },
     {
       "k": 22,
@@ -1670,7 +1785,11 @@
       "quality": 0.9985,
       "redundancy": 0.3798,
       "visual_coverage": 0.7742,
-      "stationary": 0.0097
+      "stationary": 0.0097,
+      "task": 1.0,
+      "scene": 0.5417,
+      "lab": 1.0,
+      "operator": 0.3
     },
     {
       "k": 23,
@@ -1679,7 +1798,11 @@
       "quality": 0.9986,
       "redundancy": 0.3904,
       "visual_coverage": 0.7811,
-      "stationary": 0.0097
+      "stationary": 0.0097,
+      "task": 1.0,
+      "scene": 0.5417,
+      "lab": 1.0,
+      "operator": 0.3143
     },
     {
       "k": 24,
@@ -1688,7 +1811,11 @@
       "quality": 0.9986,
       "redundancy": 0.4064,
       "visual_coverage": 0.7846,
-      "stationary": 0.0094
+      "stationary": 0.0094,
+      "task": 1.0,
+      "scene": 0.5417,
+      "lab": 1.0,
+      "operator": 0.3143
     },
     {
       "k": 25,
@@ -1697,7 +1824,11 @@
       "quality": 0.9986,
       "redundancy": 0.4126,
       "visual_coverage": 0.7897,
-      "stationary": 0.0096
+      "stationary": 0.0096,
+      "task": 1.0,
+      "scene": 0.5833,
+      "lab": 1.0,
+      "operator": 0.3286
     },
     {
       "k": 26,
@@ -1706,7 +1837,11 @@
       "quality": 0.9984,
       "redundancy": 0.4138,
       "visual_coverage": 0.7952,
-      "stationary": 0.0106
+      "stationary": 0.0106,
+      "task": 1.0,
+      "scene": 0.5833,
+      "lab": 1.0,
+      "operator": 0.3429
     },
     {
       "k": 27,
@@ -1715,7 +1850,11 @@
       "quality": 0.9984,
       "redundancy": 0.4231,
       "visual_coverage": 0.8005,
-      "stationary": 0.0107
+      "stationary": 0.0107,
+      "task": 1.0,
+      "scene": 0.5833,
+      "lab": 1.0,
+      "operator": 0.3571
     },
     {
       "k": 28,
@@ -1724,7 +1863,11 @@
       "quality": 0.9984,
       "redundancy": 0.433,
       "visual_coverage": 0.8055,
-      "stationary": 0.0106
+      "stationary": 0.0106,
+      "task": 1.0,
+      "scene": 0.5833,
+      "lab": 1.0,
+      "operator": 0.3571
     },
     {
       "k": 29,
@@ -1733,7 +1876,11 @@
       "quality": 0.9985,
       "redundancy": 0.4487,
       "visual_coverage": 0.8088,
-      "stationary": 0.0102
+      "stationary": 0.0102,
+      "task": 1.0,
+      "scene": 0.5833,
+      "lab": 1.0,
+      "operator": 0.3714
     },
     {
       "k": 30,
@@ -1742,7 +1889,11 @@
       "quality": 0.9985,
       "redundancy": 0.4738,
       "visual_coverage": 0.8134,
-      "stationary": 0.0103
+      "stationary": 0.0103,
+      "task": 1.0,
+      "scene": 0.625,
+      "lab": 1.0,
+      "operator": 0.3857
     },
     {
       "k": 31,
@@ -1751,7 +1902,11 @@
       "quality": 0.9984,
       "redundancy": 0.475,
       "visual_coverage": 0.8185,
-      "stationary": 0.0108
+      "stationary": 0.0108,
+      "task": 1.0,
+      "scene": 0.625,
+      "lab": 1.0,
+      "operator": 0.4
     },
     {
       "k": 32,
@@ -1760,7 +1915,11 @@
       "quality": 0.9983,
       "redundancy": 0.4875,
       "visual_coverage": 0.8232,
-      "stationary": 0.0111
+      "stationary": 0.0111,
+      "task": 1.0,
+      "scene": 0.625,
+      "lab": 1.0,
+      "operator": 0.4143
     },
     {
       "k": 33,
@@ -1769,7 +1928,11 @@
       "quality": 0.9984,
       "redundancy": 0.5095,
       "visual_coverage": 0.826,
-      "stationary": 0.011
+      "stationary": 0.011,
+      "task": 1.0,
+      "scene": 0.625,
+      "lab": 1.0,
+      "operator": 0.4143
     },
     {
       "k": 34,
@@ -1778,7 +1941,11 @@
       "quality": 0.9984,
       "redundancy": 0.5146,
       "visual_coverage": 0.8298,
-      "stationary": 0.0107
+      "stationary": 0.0107,
+      "task": 1.0,
+      "scene": 0.625,
+      "lab": 1.0,
+      "operator": 0.4286
     },
     {
       "k": 35,
@@ -1787,7 +1954,11 @@
       "quality": 0.9983,
       "redundancy": 0.5211,
       "visual_coverage": 0.8357,
-      "stationary": 0.0113
+      "stationary": 0.0113,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.4429
     },
     {
       "k": 36,
@@ -1796,7 +1967,11 @@
       "quality": 0.9983,
       "redundancy": 0.5325,
       "visual_coverage": 0.8395,
-      "stationary": 0.0112
+      "stationary": 0.0112,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.4571
     },
     {
       "k": 37,
@@ -1805,7 +1980,11 @@
       "quality": 0.9984,
       "redundancy": 0.5461,
       "visual_coverage": 0.8425,
-      "stationary": 0.0109
+      "stationary": 0.0109,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.4714
     },
     {
       "k": 38,
@@ -1814,7 +1993,11 @@
       "quality": 0.9984,
       "redundancy": 0.5626,
       "visual_coverage": 0.847,
-      "stationary": 0.0106
+      "stationary": 0.0106,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.4714
     },
     {
       "k": 39,
@@ -1823,7 +2006,11 @@
       "quality": 0.9984,
       "redundancy": 0.5762,
       "visual_coverage": 0.8509,
-      "stationary": 0.0108
+      "stationary": 0.0108,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.4857
     },
     {
       "k": 40,
@@ -1832,7 +2019,11 @@
       "quality": 0.9984,
       "redundancy": 0.5846,
       "visual_coverage": 0.8579,
-      "stationary": 0.011
+      "stationary": 0.011,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.5
     },
     {
       "k": 41,
@@ -1841,7 +2032,11 @@
       "quality": 0.9982,
       "redundancy": 0.5871,
       "visual_coverage": 0.8654,
-      "stationary": 0.0117
+      "stationary": 0.0117,
+      "task": 1.0,
+      "scene": 0.6667,
+      "lab": 1.0,
+      "operator": 0.5143
     },
     {
       "k": 42,
@@ -1850,7 +2045,11 @@
       "quality": 0.9982,
       "redundancy": 0.5998,
       "visual_coverage": 0.8692,
-      "stationary": 0.012
+      "stationary": 0.012,
+      "task": 1.0,
+      "scene": 0.7083,
+      "lab": 1.0,
+      "operator": 0.5286
     },
     {
       "k": 43,
@@ -1859,7 +2058,11 @@
       "quality": 0.9982,
       "redundancy": 0.6023,
       "visual_coverage": 0.8713,
-      "stationary": 0.0119
+      "stationary": 0.0119,
+      "task": 1.0,
+      "scene": 0.7083,
+      "lab": 1.0,
+      "operator": 0.5429
     },
     {
       "k": 44,
@@ -1868,7 +2071,11 @@
       "quality": 0.9982,
       "redundancy": 0.6072,
       "visual_coverage": 0.8747,
-      "stationary": 0.0119
+      "stationary": 0.0119,
+      "task": 1.0,
+      "scene": 0.75,
+      "lab": 1.0,
+      "operator": 0.5571
     },
     {
       "k": 45,
@@ -1877,7 +2084,11 @@
       "quality": 0.9983,
       "redundancy": 0.6104,
       "visual_coverage": 0.8774,
-      "stationary": 0.0116
+      "stationary": 0.0116,
+      "task": 1.0,
+      "scene": 0.75,
+      "lab": 1.0,
+      "operator": 0.5714
     },
     {
       "k": 46,
@@ -1886,7 +2097,11 @@
       "quality": 0.9983,
       "redundancy": 0.6174,
       "visual_coverage": 0.8797,
-      "stationary": 0.0115
+      "stationary": 0.0115,
+      "task": 1.0,
+      "scene": 0.75,
+      "lab": 1.0,
+      "operator": 0.5857
     },
     {
       "k": 47,
@@ -1895,7 +2110,11 @@
       "quality": 0.9983,
       "redundancy": 0.6253,
       "visual_coverage": 0.884,
-      "stationary": 0.0112
+      "stationary": 0.0112,
+      "task": 1.0,
+      "scene": 0.75,
+      "lab": 1.0,
+      "operator": 0.5857
     },
     {
       "k": 48,
@@ -1904,7 +2123,11 @@
       "quality": 0.9983,
       "redundancy": 0.631,
       "visual_coverage": 0.886,
-      "stationary": 0.011
+      "stationary": 0.011,
+      "task": 1.0,
+      "scene": 0.75,
+      "lab": 1.0,
+      "operator": 0.6
     },
     {
       "k": 49,
@@ -1913,7 +2136,11 @@
       "quality": 0.9984,
       "redundancy": 0.6375,
       "visual_coverage": 0.889,
-      "stationary": 0.011
+      "stationary": 0.011,
+      "task": 1.0,
+      "scene": 0.7917,
+      "lab": 1.0,
+      "operator": 0.6143
     },
     {
       "k": 50,
@@ -1922,7 +2149,11 @@
       "quality": 0.9982,
       "redundancy": 0.6391,
       "visual_coverage": 0.8932,
-      "stationary": 0.0119
+      "stationary": 0.0119,
+      "task": 1.0,
+      "scene": 0.7917,
+      "lab": 1.0,
+      "operator": 0.6286
     },
     {
       "k": 51,
@@ -1931,7 +2162,11 @@
       "quality": 0.9982,
       "redundancy": 0.6423,
       "visual_coverage": 0.8968,
-      "stationary": 0.0123
+      "stationary": 0.0123,
+      "task": 1.0,
+      "scene": 0.7917,
+      "lab": 1.0,
+      "operator": 0.6286
     },
     {
       "k": 52,
@@ -1940,7 +2175,11 @@
       "quality": 0.9979,
       "redundancy": 0.6364,
       "visual_coverage": 0.9026,
-      "stationary": 0.014
+      "stationary": 0.014,
+      "task": 1.0,
+      "scene": 0.8333,
+      "lab": 1.0,
+      "operator": 0.6429
     },
     {
       "k": 53,
@@ -1949,7 +2188,11 @@
       "quality": 0.9979,
       "redundancy": 0.6403,
       "visual_coverage": 0.906,
-      "stationary": 0.0138
+      "stationary": 0.0138,
+      "task": 1.0,
+      "scene": 0.8333,
+      "lab": 1.0,
+      "operator": 0.6571
     },
     {
       "k": 54,
@@ -1958,7 +2201,11 @@
       "quality": 0.998,
       "redundancy": 0.6484,
       "visual_coverage": 0.9082,
-      "stationary": 0.0136
+      "stationary": 0.0136,
+      "task": 1.0,
+      "scene": 0.8333,
+      "lab": 1.0,
+      "operator": 0.6714
     },
     {
       "k": 55,
@@ -1967,7 +2214,11 @@
       "quality": 0.9978,
       "redundancy": 0.6501,
       "visual_coverage": 0.9137,
-      "stationary": 0.0144
+      "stationary": 0.0144,
+      "task": 1.0,
+      "scene": 0.8333,
+      "lab": 1.0,
+      "operator": 0.6857
     },
     {
       "k": 56,
@@ -1976,7 +2227,11 @@
       "quality": 0.9979,
       "redundancy": 0.6572,
       "visual_coverage": 0.917,
-      "stationary": 0.0141
+      "stationary": 0.0141,
+      "task": 1.0,
+      "scene": 0.8333,
+      "lab": 1.0,
+      "operator": 0.7
     },
     {
       "k": 57,
@@ -1985,7 +2240,11 @@
       "quality": 0.9978,
       "redundancy": 0.6596,
       "visual_coverage": 0.921,
-      "stationary": 0.0145
+      "stationary": 0.0145,
+      "task": 1.0,
+      "scene": 0.875,
+      "lab": 1.0,
+      "operator": 0.7143
     },
     {
       "k": 58,
@@ -1994,7 +2253,11 @@
       "quality": 0.9978,
       "redundancy": 0.6599,
       "visual_coverage": 0.924,
-      "stationary": 0.0149
+      "stationary": 0.0149,
+      "task": 1.0,
+      "scene": 0.9167,
+      "lab": 1.0,
+      "operator": 0.7286
     },
     {
       "k": 59,
@@ -2003,7 +2266,11 @@
       "quality": 0.9977,
       "redundancy": 0.6725,
       "visual_coverage": 0.9275,
-      "stationary": 0.015
+      "stationary": 0.015,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.7429
     },
     {
       "k": 60,
@@ -2012,7 +2279,11 @@
       "quality": 0.9978,
       "redundancy": 0.6807,
       "visual_coverage": 0.9293,
-      "stationary": 0.0148
+      "stationary": 0.0148,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.7571
     },
     {
       "k": 61,
@@ -2021,7 +2292,11 @@
       "quality": 0.9977,
       "redundancy": 0.6842,
       "visual_coverage": 0.9327,
-      "stationary": 0.015
+      "stationary": 0.015,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.7714
     },
     {
       "k": 62,
@@ -2030,7 +2305,11 @@
       "quality": 0.9977,
       "redundancy": 0.6846,
       "visual_coverage": 0.9363,
-      "stationary": 0.0153
+      "stationary": 0.0153,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.7857
     },
     {
       "k": 63,
@@ -2039,7 +2318,11 @@
       "quality": 0.9977,
       "redundancy": 0.6852,
       "visual_coverage": 0.9393,
-      "stationary": 0.0157
+      "stationary": 0.0157,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8
     },
     {
       "k": 64,
@@ -2048,7 +2331,11 @@
       "quality": 0.9976,
       "redundancy": 0.6869,
       "visual_coverage": 0.944,
-      "stationary": 0.0162
+      "stationary": 0.0162,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8143
     },
     {
       "k": 65,
@@ -2057,7 +2344,11 @@
       "quality": 0.9976,
       "redundancy": 0.6954,
       "visual_coverage": 0.9465,
-      "stationary": 0.016
+      "stationary": 0.016,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8286
     },
     {
       "k": 66,
@@ -2066,7 +2357,11 @@
       "quality": 0.9975,
       "redundancy": 0.6942,
       "visual_coverage": 0.952,
-      "stationary": 0.0168
+      "stationary": 0.0168,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8286
     },
     {
       "k": 67,
@@ -2075,7 +2370,11 @@
       "quality": 0.9973,
       "redundancy": 0.6902,
       "visual_coverage": 0.9571,
-      "stationary": 0.0182
+      "stationary": 0.0182,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8429
     },
     {
       "k": 68,
@@ -2084,7 +2383,11 @@
       "quality": 0.9972,
       "redundancy": 0.6917,
       "visual_coverage": 0.9597,
-      "stationary": 0.0184
+      "stationary": 0.0184,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8571
     },
     {
       "k": 69,
@@ -2093,7 +2396,11 @@
       "quality": 0.9972,
       "redundancy": 0.6918,
       "visual_coverage": 0.9635,
-      "stationary": 0.019
+      "stationary": 0.019,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8714
     },
     {
       "k": 70,
@@ -2102,7 +2409,11 @@
       "quality": 0.9971,
       "redundancy": 0.7001,
       "visual_coverage": 0.9652,
-      "stationary": 0.0191
+      "stationary": 0.0191,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8714
     },
     {
       "k": 71,
@@ -2111,7 +2422,11 @@
       "quality": 0.9971,
       "redundancy": 0.7051,
       "visual_coverage": 0.9682,
-      "stationary": 0.0195
+      "stationary": 0.0195,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8714
     },
     {
       "k": 72,
@@ -2120,7 +2435,11 @@
       "quality": 0.997,
       "redundancy": 0.7078,
       "visual_coverage": 0.9714,
-      "stationary": 0.02
+      "stationary": 0.02,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.8857
     },
     {
       "k": 73,
@@ -2129,7 +2448,11 @@
       "quality": 0.9968,
       "redundancy": 0.709,
       "visual_coverage": 0.9762,
-      "stationary": 0.0211
+      "stationary": 0.0211,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.9
     },
     {
       "k": 74,
@@ -2138,7 +2461,11 @@
       "quality": 0.9968,
       "redundancy": 0.7156,
       "visual_coverage": 0.9787,
-      "stationary": 0.0213
+      "stationary": 0.0213,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.9143
     },
     {
       "k": 75,
@@ -2147,7 +2474,11 @@
       "quality": 0.9967,
       "redundancy": 0.718,
       "visual_coverage": 0.9826,
-      "stationary": 0.0217
+      "stationary": 0.0217,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.9286
     },
     {
       "k": 76,
@@ -2156,7 +2487,11 @@
       "quality": 0.9966,
       "redundancy": 0.7191,
       "visual_coverage": 0.9855,
-      "stationary": 0.0227
+      "stationary": 0.0227,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.9429
     },
     {
       "k": 77,
@@ -2165,7 +2500,11 @@
       "quality": 0.9963,
       "redundancy": 0.7166,
       "visual_coverage": 0.9905,
-      "stationary": 0.0244
+      "stationary": 0.0244,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.9571
     },
     {
       "k": 78,
@@ -2174,7 +2513,11 @@
       "quality": 0.9961,
       "redundancy": 0.7145,
       "visual_coverage": 0.9944,
-      "stationary": 0.0259
+      "stationary": 0.0259,
+      "task": 1.0,
+      "scene": 0.9583,
+      "lab": 1.0,
+      "operator": 0.9714
     },
     {
       "k": 79,
@@ -2183,7 +2526,11 @@
       "quality": 0.996,
       "redundancy": 0.7222,
       "visual_coverage": 0.9958,
-      "stationary": 0.0265
+      "stationary": 0.0265,
+      "task": 1.0,
+      "scene": 1.0,
+      "lab": 1.0,
+      "operator": 0.9857
     },
     {
       "k": 80,
@@ -2192,7 +2539,2273 @@
       "quality": 0.9957,
       "redundancy": 0.7217,
       "visual_coverage": 1.0,
-      "stationary": 0.0286
+      "stationary": 0.0286,
+      "task": 1.0,
+      "scene": 1.0,
+      "lab": 1.0,
+      "operator": 1.0
+    }
+  ],
+  "method_curves": [
+    {
+      "name": "Random",
+      "points": [
+        {
+          "k": 1,
+          "fraction": 0.0125,
+          "coverage": 0.1667,
+          "quality": 0.9996,
+          "redundancy": 0.0
+        },
+        {
+          "k": 2,
+          "fraction": 0.025,
+          "coverage": 0.3333,
+          "quality": 0.9958,
+          "redundancy": 0.2158
+        },
+        {
+          "k": 3,
+          "fraction": 0.0375,
+          "coverage": 0.3333,
+          "quality": 0.9972,
+          "redundancy": 0.1253
+        },
+        {
+          "k": 4,
+          "fraction": 0.05,
+          "coverage": 0.5,
+          "quality": 0.9971,
+          "redundancy": 0.2167
+        },
+        {
+          "k": 5,
+          "fraction": 0.0625,
+          "coverage": 0.5,
+          "quality": 0.9972,
+          "redundancy": 0.3672
+        },
+        {
+          "k": 6,
+          "fraction": 0.075,
+          "coverage": 0.6667,
+          "quality": 0.9971,
+          "redundancy": 0.3146
+        },
+        {
+          "k": 7,
+          "fraction": 0.0875,
+          "coverage": 0.6667,
+          "quality": 0.9974,
+          "redundancy": 0.3338
+        },
+        {
+          "k": 8,
+          "fraction": 0.1,
+          "coverage": 0.6667,
+          "quality": 0.9975,
+          "redundancy": 0.3077
+        },
+        {
+          "k": 9,
+          "fraction": 0.1125,
+          "coverage": 0.6667,
+          "quality": 0.9969,
+          "redundancy": 0.35
+        },
+        {
+          "k": 10,
+          "fraction": 0.125,
+          "coverage": 0.6667,
+          "quality": 0.9972,
+          "redundancy": 0.3769
+        },
+        {
+          "k": 11,
+          "fraction": 0.1375,
+          "coverage": 0.6667,
+          "quality": 0.9955,
+          "redundancy": 0.3692
+        },
+        {
+          "k": 12,
+          "fraction": 0.15,
+          "coverage": 0.6667,
+          "quality": 0.9958,
+          "redundancy": 0.381
+        },
+        {
+          "k": 13,
+          "fraction": 0.1625,
+          "coverage": 0.6667,
+          "quality": 0.9957,
+          "redundancy": 0.3958
+        },
+        {
+          "k": 14,
+          "fraction": 0.175,
+          "coverage": 0.6667,
+          "quality": 0.996,
+          "redundancy": 0.4171
+        },
+        {
+          "k": 15,
+          "fraction": 0.1875,
+          "coverage": 0.6667,
+          "quality": 0.9962,
+          "redundancy": 0.456
+        },
+        {
+          "k": 16,
+          "fraction": 0.2,
+          "coverage": 0.6667,
+          "quality": 0.996,
+          "redundancy": 0.4893
+        },
+        {
+          "k": 17,
+          "fraction": 0.2125,
+          "coverage": 0.6667,
+          "quality": 0.9945,
+          "redundancy": 0.4998
+        },
+        {
+          "k": 18,
+          "fraction": 0.225,
+          "coverage": 0.6667,
+          "quality": 0.9946,
+          "redundancy": 0.5113
+        },
+        {
+          "k": 19,
+          "fraction": 0.2375,
+          "coverage": 0.6667,
+          "quality": 0.9945,
+          "redundancy": 0.5357
+        },
+        {
+          "k": 20,
+          "fraction": 0.25,
+          "coverage": 0.6667,
+          "quality": 0.9945,
+          "redundancy": 0.5272
+        },
+        {
+          "k": 21,
+          "fraction": 0.2625,
+          "coverage": 0.6667,
+          "quality": 0.9941,
+          "redundancy": 0.554
+        },
+        {
+          "k": 22,
+          "fraction": 0.275,
+          "coverage": 0.8333,
+          "quality": 0.9942,
+          "redundancy": 0.5439
+        },
+        {
+          "k": 23,
+          "fraction": 0.2875,
+          "coverage": 0.8333,
+          "quality": 0.9944,
+          "redundancy": 0.5312
+        },
+        {
+          "k": 24,
+          "fraction": 0.3,
+          "coverage": 0.8333,
+          "quality": 0.9946,
+          "redundancy": 0.5342
+        },
+        {
+          "k": 25,
+          "fraction": 0.3125,
+          "coverage": 0.8333,
+          "quality": 0.9946,
+          "redundancy": 0.5502
+        },
+        {
+          "k": 26,
+          "fraction": 0.325,
+          "coverage": 0.8333,
+          "quality": 0.9948,
+          "redundancy": 0.5735
+        },
+        {
+          "k": 27,
+          "fraction": 0.3375,
+          "coverage": 0.8333,
+          "quality": 0.9949,
+          "redundancy": 0.5735
+        },
+        {
+          "k": 28,
+          "fraction": 0.35,
+          "coverage": 0.8333,
+          "quality": 0.9951,
+          "redundancy": 0.5779
+        },
+        {
+          "k": 29,
+          "fraction": 0.3625,
+          "coverage": 0.8333,
+          "quality": 0.9951,
+          "redundancy": 0.5975
+        },
+        {
+          "k": 30,
+          "fraction": 0.375,
+          "coverage": 0.8333,
+          "quality": 0.9952,
+          "redundancy": 0.615
+        },
+        {
+          "k": 31,
+          "fraction": 0.3875,
+          "coverage": 0.8333,
+          "quality": 0.9954,
+          "redundancy": 0.6378
+        },
+        {
+          "k": 32,
+          "fraction": 0.4,
+          "coverage": 0.8333,
+          "quality": 0.9955,
+          "redundancy": 0.656
+        },
+        {
+          "k": 33,
+          "fraction": 0.4125,
+          "coverage": 0.8333,
+          "quality": 0.9955,
+          "redundancy": 0.6553
+        },
+        {
+          "k": 34,
+          "fraction": 0.425,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.646
+        },
+        {
+          "k": 35,
+          "fraction": 0.4375,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.6583
+        },
+        {
+          "k": 36,
+          "fraction": 0.45,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.6516
+        },
+        {
+          "k": 37,
+          "fraction": 0.4625,
+          "coverage": 1.0,
+          "quality": 0.9943,
+          "redundancy": 0.6483
+        },
+        {
+          "k": 38,
+          "fraction": 0.475,
+          "coverage": 1.0,
+          "quality": 0.9945,
+          "redundancy": 0.6505
+        },
+        {
+          "k": 39,
+          "fraction": 0.4875,
+          "coverage": 1.0,
+          "quality": 0.9946,
+          "redundancy": 0.6456
+        },
+        {
+          "k": 40,
+          "fraction": 0.5,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6444
+        },
+        {
+          "k": 41,
+          "fraction": 0.5125,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6469
+        },
+        {
+          "k": 42,
+          "fraction": 0.525,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6427
+        },
+        {
+          "k": 43,
+          "fraction": 0.5375,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6439
+        },
+        {
+          "k": 44,
+          "fraction": 0.55,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.6531
+        },
+        {
+          "k": 45,
+          "fraction": 0.5625,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.6579
+        },
+        {
+          "k": 46,
+          "fraction": 0.575,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6723
+        },
+        {
+          "k": 47,
+          "fraction": 0.5875,
+          "coverage": 1.0,
+          "quality": 0.9946,
+          "redundancy": 0.6766
+        },
+        {
+          "k": 48,
+          "fraction": 0.6,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6752
+        },
+        {
+          "k": 49,
+          "fraction": 0.6125,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.6775
+        },
+        {
+          "k": 50,
+          "fraction": 0.625,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.6907
+        },
+        {
+          "k": 51,
+          "fraction": 0.6375,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.6904
+        },
+        {
+          "k": 52,
+          "fraction": 0.65,
+          "coverage": 1.0,
+          "quality": 0.9949,
+          "redundancy": 0.689
+        },
+        {
+          "k": 53,
+          "fraction": 0.6625,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.685
+        },
+        {
+          "k": 54,
+          "fraction": 0.675,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.6885
+        },
+        {
+          "k": 55,
+          "fraction": 0.6875,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.6928
+        },
+        {
+          "k": 56,
+          "fraction": 0.7,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.6868
+        },
+        {
+          "k": 57,
+          "fraction": 0.7125,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.6835
+        },
+        {
+          "k": 58,
+          "fraction": 0.725,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.691
+        },
+        {
+          "k": 59,
+          "fraction": 0.7375,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.6957
+        },
+        {
+          "k": 60,
+          "fraction": 0.75,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6972
+        },
+        {
+          "k": 61,
+          "fraction": 0.7625,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6959
+        },
+        {
+          "k": 62,
+          "fraction": 0.775,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6968
+        },
+        {
+          "k": 63,
+          "fraction": 0.7875,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.7061
+        },
+        {
+          "k": 64,
+          "fraction": 0.8,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.7099
+        },
+        {
+          "k": 65,
+          "fraction": 0.8125,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.7125
+        },
+        {
+          "k": 66,
+          "fraction": 0.825,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.7111
+        },
+        {
+          "k": 67,
+          "fraction": 0.8375,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.7097
+        },
+        {
+          "k": 68,
+          "fraction": 0.85,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.7138
+        },
+        {
+          "k": 69,
+          "fraction": 0.8625,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.7182
+        },
+        {
+          "k": 70,
+          "fraction": 0.875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.715
+        },
+        {
+          "k": 71,
+          "fraction": 0.8875,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.7167
+        },
+        {
+          "k": 72,
+          "fraction": 0.9,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.7192
+        },
+        {
+          "k": 73,
+          "fraction": 0.9125,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7207
+        },
+        {
+          "k": 74,
+          "fraction": 0.925,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7227
+        },
+        {
+          "k": 75,
+          "fraction": 0.9375,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7236
+        },
+        {
+          "k": 76,
+          "fraction": 0.95,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.7192
+        },
+        {
+          "k": 77,
+          "fraction": 0.9625,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.7194
+        },
+        {
+          "k": 78,
+          "fraction": 0.975,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.7207
+        },
+        {
+          "k": 79,
+          "fraction": 0.9875,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7181
+        },
+        {
+          "k": 80,
+          "fraction": 1.0,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7217
+        }
+      ]
+    },
+    {
+      "name": "Dedup-only",
+      "points": [
+        {
+          "k": 1,
+          "fraction": 0.0125,
+          "coverage": 0.1667,
+          "quality": 1.0,
+          "redundancy": 0.0
+        },
+        {
+          "k": 2,
+          "fraction": 0.025,
+          "coverage": 0.3333,
+          "quality": 0.9957,
+          "redundancy": -0.4867
+        },
+        {
+          "k": 3,
+          "fraction": 0.0375,
+          "coverage": 0.5,
+          "quality": 0.9922,
+          "redundancy": -0.1614
+        },
+        {
+          "k": 4,
+          "fraction": 0.05,
+          "coverage": 0.6667,
+          "quality": 0.9939,
+          "redundancy": -0.1147
+        },
+        {
+          "k": 5,
+          "fraction": 0.0625,
+          "coverage": 0.8333,
+          "quality": 0.9949,
+          "redundancy": -0.0506
+        },
+        {
+          "k": 6,
+          "fraction": 0.075,
+          "coverage": 0.8333,
+          "quality": 0.9953,
+          "redundancy": -0.0137
+        },
+        {
+          "k": 7,
+          "fraction": 0.0875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.0221
+        },
+        {
+          "k": 8,
+          "fraction": 0.1,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.0539
+        },
+        {
+          "k": 9,
+          "fraction": 0.1125,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.0876
+        },
+        {
+          "k": 10,
+          "fraction": 0.125,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.1116
+        },
+        {
+          "k": 11,
+          "fraction": 0.1375,
+          "coverage": 1.0,
+          "quality": 0.9961,
+          "redundancy": 0.1489
+        },
+        {
+          "k": 12,
+          "fraction": 0.15,
+          "coverage": 1.0,
+          "quality": 0.9958,
+          "redundancy": 0.1725
+        },
+        {
+          "k": 13,
+          "fraction": 0.1625,
+          "coverage": 1.0,
+          "quality": 0.9961,
+          "redundancy": 0.2148
+        },
+        {
+          "k": 14,
+          "fraction": 0.175,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.243
+        },
+        {
+          "k": 15,
+          "fraction": 0.1875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.2781
+        },
+        {
+          "k": 16,
+          "fraction": 0.2,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.2866
+        },
+        {
+          "k": 17,
+          "fraction": 0.2125,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.3083
+        },
+        {
+          "k": 18,
+          "fraction": 0.225,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.3198
+        },
+        {
+          "k": 19,
+          "fraction": 0.2375,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.3323
+        },
+        {
+          "k": 20,
+          "fraction": 0.25,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.3433
+        },
+        {
+          "k": 21,
+          "fraction": 0.2625,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.3518
+        },
+        {
+          "k": 22,
+          "fraction": 0.275,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.3578
+        },
+        {
+          "k": 23,
+          "fraction": 0.2875,
+          "coverage": 1.0,
+          "quality": 0.9949,
+          "redundancy": 0.3702
+        },
+        {
+          "k": 24,
+          "fraction": 0.3,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.377
+        },
+        {
+          "k": 25,
+          "fraction": 0.3125,
+          "coverage": 1.0,
+          "quality": 0.9944,
+          "redundancy": 0.3863
+        },
+        {
+          "k": 26,
+          "fraction": 0.325,
+          "coverage": 1.0,
+          "quality": 0.9946,
+          "redundancy": 0.3942
+        },
+        {
+          "k": 27,
+          "fraction": 0.3375,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.4004
+        },
+        {
+          "k": 28,
+          "fraction": 0.35,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.4074
+        },
+        {
+          "k": 29,
+          "fraction": 0.3625,
+          "coverage": 1.0,
+          "quality": 0.9949,
+          "redundancy": 0.4225
+        },
+        {
+          "k": 30,
+          "fraction": 0.375,
+          "coverage": 1.0,
+          "quality": 0.9949,
+          "redundancy": 0.4317
+        },
+        {
+          "k": 31,
+          "fraction": 0.3875,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.4413
+        },
+        {
+          "k": 32,
+          "fraction": 0.4,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.456
+        },
+        {
+          "k": 33,
+          "fraction": 0.4125,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.4715
+        },
+        {
+          "k": 34,
+          "fraction": 0.425,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.478
+        },
+        {
+          "k": 35,
+          "fraction": 0.4375,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.4812
+        },
+        {
+          "k": 36,
+          "fraction": 0.45,
+          "coverage": 1.0,
+          "quality": 0.9949,
+          "redundancy": 0.4884
+        },
+        {
+          "k": 37,
+          "fraction": 0.4625,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.496
+        },
+        {
+          "k": 38,
+          "fraction": 0.475,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.5066
+        },
+        {
+          "k": 39,
+          "fraction": 0.4875,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.512
+        },
+        {
+          "k": 40,
+          "fraction": 0.5,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.5164
+        },
+        {
+          "k": 41,
+          "fraction": 0.5125,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.5201
+        },
+        {
+          "k": 42,
+          "fraction": 0.525,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.5231
+        },
+        {
+          "k": 43,
+          "fraction": 0.5375,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.5286
+        },
+        {
+          "k": 44,
+          "fraction": 0.55,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.5319
+        },
+        {
+          "k": 45,
+          "fraction": 0.5625,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.5386
+        },
+        {
+          "k": 46,
+          "fraction": 0.575,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.541
+        },
+        {
+          "k": 47,
+          "fraction": 0.5875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.5464
+        },
+        {
+          "k": 48,
+          "fraction": 0.6,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.554
+        },
+        {
+          "k": 49,
+          "fraction": 0.6125,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.5634
+        },
+        {
+          "k": 50,
+          "fraction": 0.625,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.5681
+        },
+        {
+          "k": 51,
+          "fraction": 0.6375,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.5785
+        },
+        {
+          "k": 52,
+          "fraction": 0.65,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.5826
+        },
+        {
+          "k": 53,
+          "fraction": 0.6625,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.5902
+        },
+        {
+          "k": 54,
+          "fraction": 0.675,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.5947
+        },
+        {
+          "k": 55,
+          "fraction": 0.6875,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.5988
+        },
+        {
+          "k": 56,
+          "fraction": 0.7,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6107
+        },
+        {
+          "k": 57,
+          "fraction": 0.7125,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6181
+        },
+        {
+          "k": 58,
+          "fraction": 0.725,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6204
+        },
+        {
+          "k": 59,
+          "fraction": 0.7375,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6235
+        },
+        {
+          "k": 60,
+          "fraction": 0.75,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6287
+        },
+        {
+          "k": 61,
+          "fraction": 0.7625,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6332
+        },
+        {
+          "k": 62,
+          "fraction": 0.775,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6362
+        },
+        {
+          "k": 63,
+          "fraction": 0.7875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6422
+        },
+        {
+          "k": 64,
+          "fraction": 0.8,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6449
+        },
+        {
+          "k": 65,
+          "fraction": 0.8125,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6493
+        },
+        {
+          "k": 66,
+          "fraction": 0.825,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6517
+        },
+        {
+          "k": 67,
+          "fraction": 0.8375,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6566
+        },
+        {
+          "k": 68,
+          "fraction": 0.85,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6591
+        },
+        {
+          "k": 69,
+          "fraction": 0.8625,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6611
+        },
+        {
+          "k": 70,
+          "fraction": 0.875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6649
+        },
+        {
+          "k": 71,
+          "fraction": 0.8875,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6695
+        },
+        {
+          "k": 72,
+          "fraction": 0.9,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6763
+        },
+        {
+          "k": 73,
+          "fraction": 0.9125,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.6804
+        },
+        {
+          "k": 74,
+          "fraction": 0.925,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.6843
+        },
+        {
+          "k": 75,
+          "fraction": 0.9375,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.6901
+        },
+        {
+          "k": 76,
+          "fraction": 0.95,
+          "coverage": 1.0,
+          "quality": 0.9958,
+          "redundancy": 0.693
+        },
+        {
+          "k": 77,
+          "fraction": 0.9625,
+          "coverage": 1.0,
+          "quality": 0.9958,
+          "redundancy": 0.7005
+        },
+        {
+          "k": 78,
+          "fraction": 0.975,
+          "coverage": 1.0,
+          "quality": 0.9958,
+          "redundancy": 0.7079
+        },
+        {
+          "k": 79,
+          "fraction": 0.9875,
+          "coverage": 1.0,
+          "quality": 0.9958,
+          "redundancy": 0.7141
+        },
+        {
+          "k": 80,
+          "fraction": 1.0,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7217
+        }
+      ]
+    },
+    {
+      "name": "Diversity-only",
+      "points": [
+        {
+          "k": 1,
+          "fraction": 0.0125,
+          "coverage": 0.1667,
+          "quality": 0.9951,
+          "redundancy": 0.0
+        },
+        {
+          "k": 2,
+          "fraction": 0.025,
+          "coverage": 0.3333,
+          "quality": 0.995,
+          "redundancy": -0.1492
+        },
+        {
+          "k": 3,
+          "fraction": 0.0375,
+          "coverage": 0.5,
+          "quality": 0.9962,
+          "redundancy": -0.0911
+        },
+        {
+          "k": 4,
+          "fraction": 0.05,
+          "coverage": 0.6667,
+          "quality": 0.9971,
+          "redundancy": 0.1553
+        },
+        {
+          "k": 5,
+          "fraction": 0.0625,
+          "coverage": 0.8333,
+          "quality": 0.9947,
+          "redundancy": 0.1362
+        },
+        {
+          "k": 6,
+          "fraction": 0.075,
+          "coverage": 1.0,
+          "quality": 0.9917,
+          "redundancy": 0.1873
+        },
+        {
+          "k": 7,
+          "fraction": 0.0875,
+          "coverage": 1.0,
+          "quality": 0.9926,
+          "redundancy": 0.3412
+        },
+        {
+          "k": 8,
+          "fraction": 0.1,
+          "coverage": 1.0,
+          "quality": 0.9925,
+          "redundancy": 0.3105
+        },
+        {
+          "k": 9,
+          "fraction": 0.1125,
+          "coverage": 1.0,
+          "quality": 0.9929,
+          "redundancy": 0.2885
+        },
+        {
+          "k": 10,
+          "fraction": 0.125,
+          "coverage": 1.0,
+          "quality": 0.993,
+          "redundancy": 0.3188
+        },
+        {
+          "k": 11,
+          "fraction": 0.1375,
+          "coverage": 1.0,
+          "quality": 0.9936,
+          "redundancy": 0.301
+        },
+        {
+          "k": 12,
+          "fraction": 0.15,
+          "coverage": 1.0,
+          "quality": 0.9929,
+          "redundancy": 0.3452
+        },
+        {
+          "k": 13,
+          "fraction": 0.1625,
+          "coverage": 1.0,
+          "quality": 0.9922,
+          "redundancy": 0.3932
+        },
+        {
+          "k": 14,
+          "fraction": 0.175,
+          "coverage": 1.0,
+          "quality": 0.9928,
+          "redundancy": 0.3921
+        },
+        {
+          "k": 15,
+          "fraction": 0.1875,
+          "coverage": 1.0,
+          "quality": 0.9927,
+          "redundancy": 0.4202
+        },
+        {
+          "k": 16,
+          "fraction": 0.2,
+          "coverage": 1.0,
+          "quality": 0.9928,
+          "redundancy": 0.4185
+        },
+        {
+          "k": 17,
+          "fraction": 0.2125,
+          "coverage": 1.0,
+          "quality": 0.9932,
+          "redundancy": 0.3998
+        },
+        {
+          "k": 18,
+          "fraction": 0.225,
+          "coverage": 1.0,
+          "quality": 0.9919,
+          "redundancy": 0.4153
+        },
+        {
+          "k": 19,
+          "fraction": 0.2375,
+          "coverage": 1.0,
+          "quality": 0.9923,
+          "redundancy": 0.4158
+        },
+        {
+          "k": 20,
+          "fraction": 0.25,
+          "coverage": 1.0,
+          "quality": 0.9925,
+          "redundancy": 0.4493
+        },
+        {
+          "k": 21,
+          "fraction": 0.2625,
+          "coverage": 1.0,
+          "quality": 0.9928,
+          "redundancy": 0.4742
+        },
+        {
+          "k": 22,
+          "fraction": 0.275,
+          "coverage": 1.0,
+          "quality": 0.993,
+          "redundancy": 0.4667
+        },
+        {
+          "k": 23,
+          "fraction": 0.2875,
+          "coverage": 1.0,
+          "quality": 0.993,
+          "redundancy": 0.4713
+        },
+        {
+          "k": 24,
+          "fraction": 0.3,
+          "coverage": 1.0,
+          "quality": 0.9927,
+          "redundancy": 0.4847
+        },
+        {
+          "k": 25,
+          "fraction": 0.3125,
+          "coverage": 1.0,
+          "quality": 0.9921,
+          "redundancy": 0.4959
+        },
+        {
+          "k": 26,
+          "fraction": 0.325,
+          "coverage": 1.0,
+          "quality": 0.9923,
+          "redundancy": 0.5081
+        },
+        {
+          "k": 27,
+          "fraction": 0.3375,
+          "coverage": 1.0,
+          "quality": 0.9924,
+          "redundancy": 0.5048
+        },
+        {
+          "k": 28,
+          "fraction": 0.35,
+          "coverage": 1.0,
+          "quality": 0.9927,
+          "redundancy": 0.499
+        },
+        {
+          "k": 29,
+          "fraction": 0.3625,
+          "coverage": 1.0,
+          "quality": 0.993,
+          "redundancy": 0.4958
+        },
+        {
+          "k": 30,
+          "fraction": 0.375,
+          "coverage": 1.0,
+          "quality": 0.9932,
+          "redundancy": 0.4906
+        },
+        {
+          "k": 31,
+          "fraction": 0.3875,
+          "coverage": 1.0,
+          "quality": 0.9933,
+          "redundancy": 0.493
+        },
+        {
+          "k": 32,
+          "fraction": 0.4,
+          "coverage": 1.0,
+          "quality": 0.9935,
+          "redundancy": 0.5047
+        },
+        {
+          "k": 33,
+          "fraction": 0.4125,
+          "coverage": 1.0,
+          "quality": 0.9937,
+          "redundancy": 0.5037
+        },
+        {
+          "k": 34,
+          "fraction": 0.425,
+          "coverage": 1.0,
+          "quality": 0.9937,
+          "redundancy": 0.5193
+        },
+        {
+          "k": 35,
+          "fraction": 0.4375,
+          "coverage": 1.0,
+          "quality": 0.9938,
+          "redundancy": 0.5146
+        },
+        {
+          "k": 36,
+          "fraction": 0.45,
+          "coverage": 1.0,
+          "quality": 0.994,
+          "redundancy": 0.5164
+        },
+        {
+          "k": 37,
+          "fraction": 0.4625,
+          "coverage": 1.0,
+          "quality": 0.994,
+          "redundancy": 0.5206
+        },
+        {
+          "k": 38,
+          "fraction": 0.475,
+          "coverage": 1.0,
+          "quality": 0.994,
+          "redundancy": 0.5245
+        },
+        {
+          "k": 39,
+          "fraction": 0.4875,
+          "coverage": 1.0,
+          "quality": 0.9941,
+          "redundancy": 0.5264
+        },
+        {
+          "k": 40,
+          "fraction": 0.5,
+          "coverage": 1.0,
+          "quality": 0.9942,
+          "redundancy": 0.5269
+        },
+        {
+          "k": 41,
+          "fraction": 0.5125,
+          "coverage": 1.0,
+          "quality": 0.9943,
+          "redundancy": 0.5323
+        },
+        {
+          "k": 42,
+          "fraction": 0.525,
+          "coverage": 1.0,
+          "quality": 0.9942,
+          "redundancy": 0.5409
+        },
+        {
+          "k": 43,
+          "fraction": 0.5375,
+          "coverage": 1.0,
+          "quality": 0.9943,
+          "redundancy": 0.54
+        },
+        {
+          "k": 44,
+          "fraction": 0.55,
+          "coverage": 1.0,
+          "quality": 0.9943,
+          "redundancy": 0.5471
+        },
+        {
+          "k": 45,
+          "fraction": 0.5625,
+          "coverage": 1.0,
+          "quality": 0.9943,
+          "redundancy": 0.553
+        },
+        {
+          "k": 46,
+          "fraction": 0.575,
+          "coverage": 1.0,
+          "quality": 0.9945,
+          "redundancy": 0.5607
+        },
+        {
+          "k": 47,
+          "fraction": 0.5875,
+          "coverage": 1.0,
+          "quality": 0.9946,
+          "redundancy": 0.5651
+        },
+        {
+          "k": 48,
+          "fraction": 0.6,
+          "coverage": 1.0,
+          "quality": 0.9946,
+          "redundancy": 0.5742
+        },
+        {
+          "k": 49,
+          "fraction": 0.6125,
+          "coverage": 1.0,
+          "quality": 0.9946,
+          "redundancy": 0.5804
+        },
+        {
+          "k": 50,
+          "fraction": 0.625,
+          "coverage": 1.0,
+          "quality": 0.9947,
+          "redundancy": 0.5845
+        },
+        {
+          "k": 51,
+          "fraction": 0.6375,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.5894
+        },
+        {
+          "k": 52,
+          "fraction": 0.65,
+          "coverage": 1.0,
+          "quality": 0.9948,
+          "redundancy": 0.5925
+        },
+        {
+          "k": 53,
+          "fraction": 0.6625,
+          "coverage": 1.0,
+          "quality": 0.9949,
+          "redundancy": 0.601
+        },
+        {
+          "k": 54,
+          "fraction": 0.675,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.609
+        },
+        {
+          "k": 55,
+          "fraction": 0.6875,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.6155
+        },
+        {
+          "k": 56,
+          "fraction": 0.7,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.6187
+        },
+        {
+          "k": 57,
+          "fraction": 0.7125,
+          "coverage": 1.0,
+          "quality": 0.995,
+          "redundancy": 0.6188
+        },
+        {
+          "k": 58,
+          "fraction": 0.725,
+          "coverage": 1.0,
+          "quality": 0.9951,
+          "redundancy": 0.6211
+        },
+        {
+          "k": 59,
+          "fraction": 0.7375,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.6224
+        },
+        {
+          "k": 60,
+          "fraction": 0.75,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.6256
+        },
+        {
+          "k": 61,
+          "fraction": 0.7625,
+          "coverage": 1.0,
+          "quality": 0.9952,
+          "redundancy": 0.6288
+        },
+        {
+          "k": 62,
+          "fraction": 0.775,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6356
+        },
+        {
+          "k": 63,
+          "fraction": 0.7875,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6407
+        },
+        {
+          "k": 64,
+          "fraction": 0.8,
+          "coverage": 1.0,
+          "quality": 0.9953,
+          "redundancy": 0.6459
+        },
+        {
+          "k": 65,
+          "fraction": 0.8125,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.65
+        },
+        {
+          "k": 66,
+          "fraction": 0.825,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6555
+        },
+        {
+          "k": 67,
+          "fraction": 0.8375,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6573
+        },
+        {
+          "k": 68,
+          "fraction": 0.85,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6606
+        },
+        {
+          "k": 69,
+          "fraction": 0.8625,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6645
+        },
+        {
+          "k": 70,
+          "fraction": 0.875,
+          "coverage": 1.0,
+          "quality": 0.9954,
+          "redundancy": 0.6683
+        },
+        {
+          "k": 71,
+          "fraction": 0.8875,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6743
+        },
+        {
+          "k": 72,
+          "fraction": 0.9,
+          "coverage": 1.0,
+          "quality": 0.9955,
+          "redundancy": 0.6774
+        },
+        {
+          "k": 73,
+          "fraction": 0.9125,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6803
+        },
+        {
+          "k": 74,
+          "fraction": 0.925,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6822
+        },
+        {
+          "k": 75,
+          "fraction": 0.9375,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6891
+        },
+        {
+          "k": 76,
+          "fraction": 0.95,
+          "coverage": 1.0,
+          "quality": 0.9956,
+          "redundancy": 0.6969
+        },
+        {
+          "k": 77,
+          "fraction": 0.9625,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7011
+        },
+        {
+          "k": 78,
+          "fraction": 0.975,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7083
+        },
+        {
+          "k": 79,
+          "fraction": 0.9875,
+          "coverage": 1.0,
+          "quality": 0.9958,
+          "redundancy": 0.7141
+        },
+        {
+          "k": 80,
+          "fraction": 1.0,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7217
+        }
+      ]
+    },
+    {
+      "name": "EgoSelect",
+      "points": [
+        {
+          "k": 1,
+          "fraction": 0.0125,
+          "coverage": 0.1667,
+          "quality": 1.0,
+          "redundancy": 0.0
+        },
+        {
+          "k": 2,
+          "fraction": 0.025,
+          "coverage": 0.3333,
+          "quality": 0.9998,
+          "redundancy": -0.3862
+        },
+        {
+          "k": 3,
+          "fraction": 0.0375,
+          "coverage": 0.5,
+          "quality": 0.9997,
+          "redundancy": -0.1187
+        },
+        {
+          "k": 4,
+          "fraction": 0.05,
+          "coverage": 0.6667,
+          "quality": 0.9992,
+          "redundancy": -0.0351
+        },
+        {
+          "k": 5,
+          "fraction": 0.0625,
+          "coverage": 0.8333,
+          "quality": 0.9989,
+          "redundancy": -0.0347
+        },
+        {
+          "k": 6,
+          "fraction": 0.075,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.0178
+        },
+        {
+          "k": 7,
+          "fraction": 0.0875,
+          "coverage": 1.0,
+          "quality": 0.9986,
+          "redundancy": 0.0318
+        },
+        {
+          "k": 8,
+          "fraction": 0.1,
+          "coverage": 1.0,
+          "quality": 0.9987,
+          "redundancy": 0.1196
+        },
+        {
+          "k": 9,
+          "fraction": 0.1125,
+          "coverage": 1.0,
+          "quality": 0.9988,
+          "redundancy": 0.1402
+        },
+        {
+          "k": 10,
+          "fraction": 0.125,
+          "coverage": 1.0,
+          "quality": 0.9989,
+          "redundancy": 0.1468
+        },
+        {
+          "k": 11,
+          "fraction": 0.1375,
+          "coverage": 1.0,
+          "quality": 0.9989,
+          "redundancy": 0.1903
+        },
+        {
+          "k": 12,
+          "fraction": 0.15,
+          "coverage": 1.0,
+          "quality": 0.9989,
+          "redundancy": 0.1979
+        },
+        {
+          "k": 13,
+          "fraction": 0.1625,
+          "coverage": 1.0,
+          "quality": 0.999,
+          "redundancy": 0.2373
+        },
+        {
+          "k": 14,
+          "fraction": 0.175,
+          "coverage": 1.0,
+          "quality": 0.9988,
+          "redundancy": 0.2364
+        },
+        {
+          "k": 15,
+          "fraction": 0.1875,
+          "coverage": 1.0,
+          "quality": 0.9988,
+          "redundancy": 0.2673
+        },
+        {
+          "k": 16,
+          "fraction": 0.2,
+          "coverage": 1.0,
+          "quality": 0.9989,
+          "redundancy": 0.3169
+        },
+        {
+          "k": 17,
+          "fraction": 0.2125,
+          "coverage": 1.0,
+          "quality": 0.9988,
+          "redundancy": 0.3203
+        },
+        {
+          "k": 18,
+          "fraction": 0.225,
+          "coverage": 1.0,
+          "quality": 0.9988,
+          "redundancy": 0.3381
+        },
+        {
+          "k": 19,
+          "fraction": 0.2375,
+          "coverage": 1.0,
+          "quality": 0.9988,
+          "redundancy": 0.3512
+        },
+        {
+          "k": 20,
+          "fraction": 0.25,
+          "coverage": 1.0,
+          "quality": 0.9987,
+          "redundancy": 0.3534
+        },
+        {
+          "k": 21,
+          "fraction": 0.2625,
+          "coverage": 1.0,
+          "quality": 0.9986,
+          "redundancy": 0.3765
+        },
+        {
+          "k": 22,
+          "fraction": 0.275,
+          "coverage": 1.0,
+          "quality": 0.9985,
+          "redundancy": 0.3798
+        },
+        {
+          "k": 23,
+          "fraction": 0.2875,
+          "coverage": 1.0,
+          "quality": 0.9986,
+          "redundancy": 0.3904
+        },
+        {
+          "k": 24,
+          "fraction": 0.3,
+          "coverage": 1.0,
+          "quality": 0.9986,
+          "redundancy": 0.4064
+        },
+        {
+          "k": 25,
+          "fraction": 0.3125,
+          "coverage": 1.0,
+          "quality": 0.9986,
+          "redundancy": 0.4126
+        },
+        {
+          "k": 26,
+          "fraction": 0.325,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.4138
+        },
+        {
+          "k": 27,
+          "fraction": 0.3375,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.4231
+        },
+        {
+          "k": 28,
+          "fraction": 0.35,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.433
+        },
+        {
+          "k": 29,
+          "fraction": 0.3625,
+          "coverage": 1.0,
+          "quality": 0.9985,
+          "redundancy": 0.4487
+        },
+        {
+          "k": 30,
+          "fraction": 0.375,
+          "coverage": 1.0,
+          "quality": 0.9985,
+          "redundancy": 0.4738
+        },
+        {
+          "k": 31,
+          "fraction": 0.3875,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.475
+        },
+        {
+          "k": 32,
+          "fraction": 0.4,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.4875
+        },
+        {
+          "k": 33,
+          "fraction": 0.4125,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.5095
+        },
+        {
+          "k": 34,
+          "fraction": 0.425,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.5146
+        },
+        {
+          "k": 35,
+          "fraction": 0.4375,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.5211
+        },
+        {
+          "k": 36,
+          "fraction": 0.45,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.5325
+        },
+        {
+          "k": 37,
+          "fraction": 0.4625,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.5461
+        },
+        {
+          "k": 38,
+          "fraction": 0.475,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.5626
+        },
+        {
+          "k": 39,
+          "fraction": 0.4875,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.5762
+        },
+        {
+          "k": 40,
+          "fraction": 0.5,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.5846
+        },
+        {
+          "k": 41,
+          "fraction": 0.5125,
+          "coverage": 1.0,
+          "quality": 0.9982,
+          "redundancy": 0.5871
+        },
+        {
+          "k": 42,
+          "fraction": 0.525,
+          "coverage": 1.0,
+          "quality": 0.9982,
+          "redundancy": 0.5998
+        },
+        {
+          "k": 43,
+          "fraction": 0.5375,
+          "coverage": 1.0,
+          "quality": 0.9982,
+          "redundancy": 0.6023
+        },
+        {
+          "k": 44,
+          "fraction": 0.55,
+          "coverage": 1.0,
+          "quality": 0.9982,
+          "redundancy": 0.6072
+        },
+        {
+          "k": 45,
+          "fraction": 0.5625,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.6104
+        },
+        {
+          "k": 46,
+          "fraction": 0.575,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.6174
+        },
+        {
+          "k": 47,
+          "fraction": 0.5875,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.6253
+        },
+        {
+          "k": 48,
+          "fraction": 0.6,
+          "coverage": 1.0,
+          "quality": 0.9983,
+          "redundancy": 0.631
+        },
+        {
+          "k": 49,
+          "fraction": 0.6125,
+          "coverage": 1.0,
+          "quality": 0.9984,
+          "redundancy": 0.6375
+        },
+        {
+          "k": 50,
+          "fraction": 0.625,
+          "coverage": 1.0,
+          "quality": 0.9982,
+          "redundancy": 0.6391
+        },
+        {
+          "k": 51,
+          "fraction": 0.6375,
+          "coverage": 1.0,
+          "quality": 0.9982,
+          "redundancy": 0.6423
+        },
+        {
+          "k": 52,
+          "fraction": 0.65,
+          "coverage": 1.0,
+          "quality": 0.9979,
+          "redundancy": 0.6364
+        },
+        {
+          "k": 53,
+          "fraction": 0.6625,
+          "coverage": 1.0,
+          "quality": 0.9979,
+          "redundancy": 0.6403
+        },
+        {
+          "k": 54,
+          "fraction": 0.675,
+          "coverage": 1.0,
+          "quality": 0.998,
+          "redundancy": 0.6484
+        },
+        {
+          "k": 55,
+          "fraction": 0.6875,
+          "coverage": 1.0,
+          "quality": 0.9978,
+          "redundancy": 0.6501
+        },
+        {
+          "k": 56,
+          "fraction": 0.7,
+          "coverage": 1.0,
+          "quality": 0.9979,
+          "redundancy": 0.6572
+        },
+        {
+          "k": 57,
+          "fraction": 0.7125,
+          "coverage": 1.0,
+          "quality": 0.9978,
+          "redundancy": 0.6596
+        },
+        {
+          "k": 58,
+          "fraction": 0.725,
+          "coverage": 1.0,
+          "quality": 0.9978,
+          "redundancy": 0.6599
+        },
+        {
+          "k": 59,
+          "fraction": 0.7375,
+          "coverage": 1.0,
+          "quality": 0.9977,
+          "redundancy": 0.6725
+        },
+        {
+          "k": 60,
+          "fraction": 0.75,
+          "coverage": 1.0,
+          "quality": 0.9978,
+          "redundancy": 0.6807
+        },
+        {
+          "k": 61,
+          "fraction": 0.7625,
+          "coverage": 1.0,
+          "quality": 0.9977,
+          "redundancy": 0.6842
+        },
+        {
+          "k": 62,
+          "fraction": 0.775,
+          "coverage": 1.0,
+          "quality": 0.9977,
+          "redundancy": 0.6846
+        },
+        {
+          "k": 63,
+          "fraction": 0.7875,
+          "coverage": 1.0,
+          "quality": 0.9977,
+          "redundancy": 0.6852
+        },
+        {
+          "k": 64,
+          "fraction": 0.8,
+          "coverage": 1.0,
+          "quality": 0.9976,
+          "redundancy": 0.6869
+        },
+        {
+          "k": 65,
+          "fraction": 0.8125,
+          "coverage": 1.0,
+          "quality": 0.9976,
+          "redundancy": 0.6954
+        },
+        {
+          "k": 66,
+          "fraction": 0.825,
+          "coverage": 1.0,
+          "quality": 0.9975,
+          "redundancy": 0.6942
+        },
+        {
+          "k": 67,
+          "fraction": 0.8375,
+          "coverage": 1.0,
+          "quality": 0.9973,
+          "redundancy": 0.6902
+        },
+        {
+          "k": 68,
+          "fraction": 0.85,
+          "coverage": 1.0,
+          "quality": 0.9972,
+          "redundancy": 0.6917
+        },
+        {
+          "k": 69,
+          "fraction": 0.8625,
+          "coverage": 1.0,
+          "quality": 0.9972,
+          "redundancy": 0.6918
+        },
+        {
+          "k": 70,
+          "fraction": 0.875,
+          "coverage": 1.0,
+          "quality": 0.9971,
+          "redundancy": 0.7001
+        },
+        {
+          "k": 71,
+          "fraction": 0.8875,
+          "coverage": 1.0,
+          "quality": 0.9971,
+          "redundancy": 0.7051
+        },
+        {
+          "k": 72,
+          "fraction": 0.9,
+          "coverage": 1.0,
+          "quality": 0.997,
+          "redundancy": 0.7078
+        },
+        {
+          "k": 73,
+          "fraction": 0.9125,
+          "coverage": 1.0,
+          "quality": 0.9968,
+          "redundancy": 0.709
+        },
+        {
+          "k": 74,
+          "fraction": 0.925,
+          "coverage": 1.0,
+          "quality": 0.9968,
+          "redundancy": 0.7156
+        },
+        {
+          "k": 75,
+          "fraction": 0.9375,
+          "coverage": 1.0,
+          "quality": 0.9967,
+          "redundancy": 0.718
+        },
+        {
+          "k": 76,
+          "fraction": 0.95,
+          "coverage": 1.0,
+          "quality": 0.9966,
+          "redundancy": 0.7191
+        },
+        {
+          "k": 77,
+          "fraction": 0.9625,
+          "coverage": 1.0,
+          "quality": 0.9963,
+          "redundancy": 0.7166
+        },
+        {
+          "k": 78,
+          "fraction": 0.975,
+          "coverage": 1.0,
+          "quality": 0.9961,
+          "redundancy": 0.7145
+        },
+        {
+          "k": 79,
+          "fraction": 0.9875,
+          "coverage": 1.0,
+          "quality": 0.996,
+          "redundancy": 0.7222
+        },
+        {
+          "k": 80,
+          "fraction": 1.0,
+          "coverage": 1.0,
+          "quality": 0.9957,
+          "redundancy": 0.7217
+        }
+      ]
     }
   ],
   "benchmark": {

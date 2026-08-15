@@ -1,5 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import type { CurvePoint, Episode, Payload } from "./types";
+import type {
+  CurvePoint,
+  Episode,
+  HeldoutField,
+  MethodBlock,
+  MethodCurve,
+  Payload,
+} from "./types";
 import "./App.css";
 
 const DATA_URL = "/data/demo_payload.json";
@@ -9,6 +16,10 @@ const PAD = 36;
 const BUDGET_MIN = 10;
 const BUDGET_MAX = 100;
 const BUDGET_DEFAULT = 30;
+const CURVE_W = 300;
+const CURVE_H = 148;
+const CURVE_PAD = { l: 26, r: 8, t: 8, b: 24 };
+const DEFAULT_SWEEP = [0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1];
 
 function budgetCount(n: number, fraction: number): number {
   return Math.max(1, Math.min(n, Math.round(n * fraction)));
@@ -22,6 +33,161 @@ function shortName(name: string): string {
   if (name === "Dedup-only") return "Dedup";
   if (name === "Diversity-only") return "Diversity";
   return name;
+}
+
+function episodeCode(ep: Episode): string {
+  return `E${String(ep.rank).padStart(3, "0")}`;
+}
+
+function whyLines(reason: string): string[] {
+  return reason
+    .split(";")
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+function similarPct(value: number | null): string | null {
+  if (value == null) return null;
+  return `${Math.round(value * 100)}% similar`;
+}
+
+function methodKey(name: string): string {
+  if (name === "EgoSelect") return "ego";
+  if (name === "Dedup-only") return "dedup";
+  if (name === "Diversity-only") return "div";
+  return "rand";
+}
+
+function pointAt(curve: MethodCurve, k: number) {
+  return curve.points.find((row) => row.k === k) ?? curve.points[k - 1];
+}
+
+function curveX(fraction: number): number {
+  return (
+    CURVE_PAD.l + fraction * (CURVE_W - CURVE_PAD.l - CURVE_PAD.r)
+  );
+}
+
+function curveY(coverage: number): number {
+  return (
+    CURVE_PAD.t + (1 - coverage) * (CURVE_H - CURVE_PAD.t - CURVE_PAD.b)
+  );
+}
+
+function wins(values: number[], better: "max" | "min"): boolean[] {
+  const best = better === "max" ? Math.max(...values) : Math.min(...values);
+  const hit = values.map((v) => Math.abs(v - best) < 1e-6);
+  return hit.every(Boolean) ? values.map(() => false) : hit;
+}
+
+function pct(value: number): string {
+  return `${Math.round(value * 100)}%`;
+}
+
+function HeldOut({
+  fields,
+  point,
+}: {
+  fields: HeldoutField[];
+  point: CurvePoint;
+}) {
+  const rows = fields.filter((field) => point[field.key] != null);
+  if (!rows.length) return null;
+  return (
+    <div className="heldout">
+      <p className="kicker">Held-out validation</p>
+      <p className="note">not used by selector</p>
+      <dl>
+        {rows.map((field) => (
+          <div key={field.key}>
+            <dt>{field.label}</dt>
+            <dd>{pct(point[field.key] as number)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+function CoverageChart({
+  series,
+  percent,
+  sweep,
+}: {
+  series: MethodCurve[];
+  percent: number;
+  sweep: number[];
+}) {
+  const nowX = curveX(percent / 100);
+  const ticks = sweep.map((frac) => Math.round(frac * 100));
+  return (
+    <div className="curve-block">
+      <p className="k">Coverage vs training budget</p>
+      <svg
+        viewBox={`0 0 ${CURVE_W} ${CURVE_H}`}
+        role="img"
+        aria-label="Region coverage versus training budget for Random, Dedup, Diversity, and EgoSelect"
+      >
+        <line
+          className="curve-grid"
+          x1={CURVE_PAD.l}
+          y1={curveY(1)}
+          x2={CURVE_W - CURVE_PAD.r}
+          y2={curveY(1)}
+        />
+        <line
+          className="curve-grid"
+          x1={CURVE_PAD.l}
+          y1={curveY(0.5)}
+          x2={CURVE_W - CURVE_PAD.r}
+          y2={curveY(0.5)}
+        />
+        <text className="curve-tick" x={2} y={curveY(1) + 3}>
+          1.0
+        </text>
+        <text className="curve-tick" x={2} y={curveY(0.5) + 3}>
+          0.5
+        </text>
+        <line
+          className="curve-now"
+          x1={nowX}
+          y1={CURVE_PAD.t}
+          x2={nowX}
+          y2={CURVE_H - CURVE_PAD.b}
+        />
+        {series.map((curve) => {
+          const d = curve.points
+            .map((row) => `${curveX(row.fraction)},${curveY(row.coverage)}`)
+            .join(" ");
+          return (
+            <polyline
+              key={curve.name}
+              className={`curve-line ${methodKey(curve.name)}`}
+              points={d}
+            />
+          );
+        })}
+        {ticks.map((pct) => (
+          <text
+            key={pct}
+            className="curve-tick"
+            x={curveX(pct / 100)}
+            y={CURVE_H - 6}
+            textAnchor="middle"
+          >
+            {pct}
+          </text>
+        ))}
+      </svg>
+      <div className="curve-legend">
+        {series.map((curve) => (
+          <span key={curve.name} className={methodKey(curve.name)}>
+            {shortName(curve.name)}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function project(
@@ -69,7 +235,11 @@ export default function App() {
       })
       .then((data) => {
         if (cancelled) return;
-        if (!data.episodes?.length || !data.retention_curve?.length) {
+        if (
+          !data.episodes?.length ||
+          !data.retention_curve?.length ||
+          !data.method_curves?.length
+        ) {
           setLoadError("demo_payload.json is incomplete.");
           return;
         }
@@ -97,19 +267,61 @@ export default function App() {
       ? indexed
       : payload?.retention_curve.find((row) => row.k === k);
   const selected = payload?.episodes.find((e) => e.id === selectedId);
-  const methods = stress
-    ? payload?.stress.methods
-    : payload?.benchmark.methods;
+  const neighbor = selected?.nearest
+    ? payload?.episodes.find((e) => e.id === selected.nearest)
+    : undefined;
+  const methodCurves = payload?.method_curves;
 
   if (loadError) return <Missing reason={loadError} />;
   if (!payload) {
     return <div className="shell" aria-busy="true" />;
   }
-  if (!toXY || !curve || !methods) {
+  if (!toXY || !curve || !methodCurves || methodCurves.length < 4) {
     return <Missing reason="demo_payload.json is incomplete." />;
   }
 
   const keep = (ep: Episode) => ep.rank <= k;
+  const selectedKept = selected ? keep(selected) : false;
+  const neighborKept = Boolean(neighbor && keep(neighbor));
+  const showLink = Boolean(
+    selected && !selectedKept && neighbor && neighborKept && toXY,
+  );
+  const selectedXY = selected && toXY ? toXY(selected.x, selected.y) : null;
+  const neighborXY = neighbor && toXY ? toXY(neighbor.x, neighbor.y) : null;
+  const reasons = selected ? whyLines(selected.reason) : [];
+  const similar = selected ? similarPct(selected.nearest_similarity) : null;
+  const compared: MethodBlock[] = stress
+    ? payload.stress.methods
+    : methodCurves.map((series) => {
+        const row = pointAt(series, k);
+        return {
+          name: series.name,
+          coverage: row?.coverage ?? 0,
+          quality: row?.quality ?? 0,
+          redundancy: row?.redundancy ?? 0,
+          visual_coverage: 0,
+          stationary: 0,
+        };
+      });
+  const bestCov = wins(
+    compared.map((m) => m.coverage),
+    "max",
+  );
+  const bestQual = wins(
+    compared.map((m) => m.quality),
+    "max",
+  );
+  const bestRed = wins(
+    compared.map((m) => m.redundancy),
+    "min",
+  );
+  const bestInj = stress
+    ? wins(
+        compared.map((m) => m.corrupt_retained ?? Number.POSITIVE_INFINITY),
+        "min",
+      )
+    : compared.map(() => false);
+  const sweep = payload.meta.sweep?.length ? payload.meta.sweep : DEFAULT_SWEEP;
 
   return (
     <div className="shell">
@@ -121,7 +333,12 @@ export default function App() {
         <div className="slider-block">
           <div className="slider-head">
             <label htmlFor="budget">Training budget</label>
-            <span className="slider-value">{percent}%</span>
+            <span className="slider-value">
+              {percent}%
+              <em>
+                {k}/{n}
+              </em>
+            </span>
           </div>
           <div className="slider-track">
             <span>{BUDGET_MIN}%</span>
@@ -155,10 +372,20 @@ export default function App() {
             <text className="axis" x={PAD} y={18}>
               behavior space · {n} episodes · {payload.meta.n_regions} regions
             </text>
+            {showLink && selectedXY && neighborXY ? (
+              <line
+                className="link"
+                x1={selectedXY.cx}
+                y1={selectedXY.cy}
+                x2={neighborXY.cx}
+                y2={neighborXY.cy}
+              />
+            ) : null}
             {payload.episodes.map((ep) => {
               const { cx, cy } = toXY(ep.x, ep.y);
               const retained = keep(ep);
               const active = selectedId === ep.id;
+              const mate = showLink && neighbor?.id === ep.id;
               return (
                 <g key={ep.id}>
                   {ep.role ? (
@@ -174,11 +401,16 @@ export default function App() {
                       "ep",
                       retained ? "kept" : "drop",
                       active ? "active" : "",
+                      mate ? "mate" : "",
                     ].join(" ")}
+                    data-id={ep.id}
+                    data-rank={ep.rank}
                     cx={cx}
                     cy={cy}
-                    r={active ? 7.5 : 6}
-                    onClick={() => setSelectedId(ep.id)}
+                    r={active || mate ? 7.5 : 6}
+                    onClick={() =>
+                      setSelectedId((cur) => (cur === ep.id ? null : ep.id))
+                    }
                   />
                 </g>
               );
@@ -189,106 +421,120 @@ export default function App() {
         <aside className="inspector">
           {selected ? (
             <>
-              <div className="id" title={selected.id}>
-                {selected.id.slice(0, 16)}
-              </div>
-              <div className={keep(selected) ? "verdict" : "verdict drop"}>
-                {keep(selected) ? "KEEP" : "DROP"}
-              </div>
-              <dl className="stats">
-                <div>
-                  <dt>training value</dt>
-                  <dd>{fmt(selected.value)}</dd>
+              <p className="kicker" title={selected.id}>
+                Episode {episodeCode(selected)}
+              </p>
+              <p className={selectedKept ? "verdict" : "verdict drop"}>
+                {selectedKept ? "KEEP" : "DROP"}
+              </p>
+              {selectedKept ? (
+                <dl className="stats">
+                  <div>
+                    <dt>Training value</dt>
+                    <dd>{fmt(selected.value, 2)}</dd>
+                  </div>
+                  <div>
+                    <dt>Quality</dt>
+                    <dd>{fmt(selected.quality, 2)}</dd>
+                  </div>
+                  <div>
+                    <dt>Coverage gain</dt>
+                    <dd>{fmt(selected.coverage_gain, 2)}</dd>
+                  </div>
+                  <div>
+                    <dt>Redundancy</dt>
+                    <dd>{fmt(selected.redundancy, 2)}</dd>
+                  </div>
+                </dl>
+              ) : neighbor && neighborKept ? (
+                <div className="nearest">
+                  <p className="k">Nearest retained</p>
+                  <p className="v" title={neighbor.id}>
+                    {episodeCode(neighbor)}
+                    {similar ? <span> · {similar}</span> : null}
+                  </p>
                 </div>
-                <div>
-                  <dt>quality</dt>
-                  <dd>{fmt(selected.quality)}</dd>
-                </div>
-                <div>
-                  <dt>coverage gain</dt>
-                  <dd>{fmt(selected.coverage_gain)}</dd>
-                </div>
-                <div>
-                  <dt>redundancy</dt>
-                  <dd>{fmt(selected.redundancy)}</dd>
-                </div>
-              </dl>
-              <p className="why-label">Why</p>
-              <p className="why">{selected.reason}</p>
+              ) : null}
+              {reasons.length ? (
+                <>
+                  <p className="why-label">Why</p>
+                  <ul className="why">
+                    {reasons.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
             </>
           ) : (
-            <p className="idle">Select an episode.</p>
+            <HeldOut fields={payload.meta.heldout ?? []} point={curve} />
           )}
         </aside>
       </div>
 
       <footer className="bottom">
-        <div className="live">
-          <div>
-            <div className="k">retained</div>
-            <div className="v">
-              {k}/{n}
-            </div>
-          </div>
-          <div>
-            <div className="k">coverage</div>
-            <div className="v">{fmt(curve.coverage)}</div>
-          </div>
-          <div>
-            <div className="k">quality</div>
-            <div className="v">{fmt(curve.quality)}</div>
-          </div>
-          <div>
-            <div className="k">redundancy</div>
-            <div className="v">{fmt(curve.redundancy)}</div>
-          </div>
-        </div>
-
         <div className="compare-row">
-          <div className="methods">
-            {methods.map((m) => (
-              <div
-                key={m.name}
-                className={m.name === "EgoSelect" ? "method ego" : "method"}
-              >
-                <div className="name">{shortName(m.name)}</div>
-                <div className="nums">
-                  {stress ? (
-                    <>
-                      <div>
-                        <span>injected</span>
-                        <b>
-                          {m.corrupt_retained}/{m.corrupt_pool}
-                        </b>
-                      </div>
-                      <div>
-                        <span>cov</span>
-                        <b>{fmt(m.coverage)}</b>
-                      </div>
-                      <div>
-                        <span>q</span>
-                        <b>{fmt(m.quality)}</b>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div>
-                        <span>cov</span>
-                        <b>{fmt(m.coverage)}</b>
-                      </div>
-                      <div>
-                        <span>q</span>
-                        <b>{fmt(m.quality)}</b>
-                      </div>
-                      <div>
-                        <span>red</span>
-                        <b>{fmt(m.redundancy)}</b>
-                      </div>
-                    </>
-                  )}
+          <div>
+            <p className="compare-kicker">
+              {stress
+                ? "Equal keep · 30% injected"
+                : `Equal keep · ${percent}%`}
+            </p>
+            <div className="methods">
+              {compared.map((m, i) => (
+                <div
+                  key={m.name}
+                  className={m.name === "EgoSelect" ? "method ego" : "method"}
+                >
+                  <div className="name">{shortName(m.name)}</div>
+                  <div className="nums">
+                    {stress ? (
+                      <>
+                        <div>
+                          <span>injected</span>
+                          <b className={bestInj[i] ? "best" : ""}>
+                            {m.corrupt_retained}/{m.corrupt_pool}
+                          </b>
+                        </div>
+                        <div>
+                          <span>coverage</span>
+                          <b className={bestCov[i] ? "best" : ""}>
+                            {fmt(m.coverage)}
+                          </b>
+                        </div>
+                        <div>
+                          <span>quality</span>
+                          <b className={bestQual[i] ? "best" : ""}>
+                            {fmt(m.quality)}
+                          </b>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div>
+                          <span>coverage</span>
+                          <b className={bestCov[i] ? "best" : ""}>
+                            {fmt(m.coverage)}
+                          </b>
+                        </div>
+                        <div>
+                          <span>quality</span>
+                          <b className={bestQual[i] ? "best" : ""}>
+                            {fmt(m.quality)}
+                          </b>
+                        </div>
+                        <div>
+                          <span>redundancy</span>
+                          <b className={bestRed[i] ? "best" : ""}>
+                            {fmt(m.redundancy)}
+                          </b>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           <div className="toggle">
             <button
@@ -311,6 +557,7 @@ export default function App() {
             </button>
           </div>
         </div>
+        <CoverageChart series={methodCurves} percent={percent} sweep={sweep} />
       </footer>
     </div>
   );

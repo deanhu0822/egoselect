@@ -19,6 +19,7 @@ from egoselect.metrics import evaluate_keep  # noqa: E402
 FEATURES = REPO_ROOT / "outputs" / "episode_features.parquet"
 SELECTIONS = REPO_ROOT / "outputs" / "selections.csv"
 EXPERIMENT = REPO_ROOT / "outputs" / "experiment_results.csv"
+CURVES = REPO_ROOT / "outputs" / "method_curves.csv"
 AUDIT = REPO_ROOT / "outputs" / "greedy_audit.json"
 COHORT = REPO_ROOT / "outputs" / "cohort_summary.json"
 OUT_A = REPO_ROOT / "outputs" / "demo_payload.json"
@@ -26,6 +27,7 @@ OUT_B = REPO_ROOT / "web" / "public" / "data" / "demo_payload.json"
 
 METHODS = ("Random", "Dedup-only", "Diversity-only", "EgoSelect")
 PRIMARY = 0.3
+SWEEP = (0.10, 0.20, 0.30, 0.40, 0.50, 0.75, 1.00)
 
 
 def _r(x, n: int = 4):
@@ -39,6 +41,33 @@ def _s(x) -> str:
         return ""
     text = str(x)
     return "" if text in {"nan", "None"} else text
+
+
+HELDOUT_LABELS = (
+    ("task", "Task coverage"),
+    ("scene", "Scene coverage"),
+    ("lab", "Lab coverage"),
+    ("operator", "Operator coverage"),
+)
+
+
+def _heldout_fields(features: pd.DataFrame) -> list[dict]:
+    fields = []
+    for col, label in HELDOUT_LABELS:
+        if col not in features.columns:
+            continue
+        series = features[col].dropna().astype(str)
+        series = series[series.str.strip() != ""]
+        if series.nunique() < 2:
+            continue
+        fields.append(
+            {
+                "key": col,
+                "label": label,
+                "n_labels": int(series.nunique()),
+            }
+        )
+    return fields
 
 
 def _method_block(row: pd.Series, *, stress: bool) -> dict:
@@ -62,7 +91,7 @@ def main() -> int:
     parser.add_argument("--selections", type=Path, default=SELECTIONS)
     args = parser.parse_args()
 
-    for path in (args.features, args.selections, EXPERIMENT, AUDIT, COHORT):
+    for path in (args.features, args.selections, EXPERIMENT, CURVES, AUDIT, COHORT):
         if not path.exists():
             print(f"missing {path}", file=sys.stderr)
             return 1
@@ -70,6 +99,7 @@ def main() -> int:
     features = pd.read_parquet(args.features)
     sel = pd.read_csv(args.selections)
     exp = pd.read_csv(EXPERIMENT)
+    curves = pd.read_csv(CURVES)
     audit = json.loads(AUDIT.read_text())
     cohort = json.loads(COHORT.read_text())
 
@@ -120,11 +150,36 @@ def main() -> int:
                 "redundancy": _r(ev["nn_redundancy"]),
                 "visual_coverage": _r(ev["visual_coverage"]),
                 "stationary": _r(ev["stationary_content_ratio"]),
+                "task": _r(ev["task_diversity"]),
+                "scene": _r(ev["scene_diversity"]),
+                "lab": _r(ev["lab_diversity"]),
+                "operator": _r(ev["operator_diversity"]),
             }
         )
 
     clean = exp[(exp["corruption_rate"] == 0.0) & (exp["budget"] == PRIMARY)]
     stress = exp[(exp["corruption_rate"] == 0.30) & (exp["budget"] == PRIMARY)]
+    method_curves = []
+    for name in METHODS:
+        sub = curves[curves["method"] == name].sort_values("k")
+        if len(sub) != n:
+            print(f"method_curves {name} has {len(sub)} rows, expected {n}", file=sys.stderr)
+            return 1
+        method_curves.append(
+            {
+                "name": name,
+                "points": [
+                    {
+                        "k": int(row["k"]),
+                        "fraction": _r(row["fraction"], 4),
+                        "coverage": _r(row["coverage"]),
+                        "quality": _r(row["quality"]),
+                        "redundancy": _r(row["redundancy"]),
+                    }
+                    for _, row in sub.iterrows()
+                ],
+            }
+        )
     payload = {
         "meta": {
             "title": "EgoSelect",
@@ -147,9 +202,12 @@ def main() -> int:
             "tasks": cohort.get("tasks", []),
             "labs": cohort.get("labs", []),
             "n_rescore_passes": int(audit.get("n_rescore_passes", n)),
+            "sweep": list(SWEEP),
+            "heldout": _heldout_fields(features),
         },
         "episodes": episodes,
         "retention_curve": curve,
+        "method_curves": method_curves,
         "benchmark": {
             "budget": PRIMARY,
             "n_keep": keep30,

@@ -11,10 +11,10 @@
   "max_abs_value_shift_after_first": 0.536707351455966,
   "keep_example": {
     "episode": "692e90f07641010d043544f1",
-    "reason": "High quality (1.000); Underrepresented region 4"
+    "reason": "Underrepresented behavior; High quality"
   },
   "drop_example": {
     "episode": "692f13d3f59fd218b1be026e",
-    "reason": "Region already represented; High stationary content (19%)"
+    "reason": "Behavior already represented; 19% stationary"
   }
 }

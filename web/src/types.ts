@@ -25,6 +25,16 @@ export type CurvePoint = {
   redundancy: number;
   visual_coverage: number;
   stationary: number;
+  task: number | null;
+  scene: number | null;
+  lab: number | null;
+  operator: number | null;
+};
+
+export type HeldoutField = {
+  key: "task" | "scene" | "lab" | "operator";
+  label: string;
+  n_labels: number;
 };
 
 export type MethodBlock = {
@@ -36,6 +46,19 @@ export type MethodBlock = {
   stationary: number;
   corrupt_retained?: number;
   corrupt_pool?: number;
+};
+
+export type MethodPoint = {
+  k: number;
+  fraction: number;
+  coverage: number;
+  quality: number;
+  redundancy: number;
+};
+
+export type MethodCurve = {
+  name: string;
+  points: MethodPoint[];
 };
 
 export type Payload = {
@@ -57,9 +80,12 @@ export type Payload = {
     tasks: string[];
     labs: string[];
     n_rescore_passes: number;
+    sweep: number[];
+    heldout: HeldoutField[];
   };
   episodes: Episode[];
   retention_curve: CurvePoint[];
+  method_curves: MethodCurve[];
   benchmark: {
     budget: number;
     n_keep: number;

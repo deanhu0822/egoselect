@@ -21,8 +21,9 @@ from egoselect.metrics import evaluate_keep  # noqa: E402
 FEATURES_PATH = REPO_ROOT / "outputs" / "episode_features.parquet"
 METRICS_PATH = REPO_ROOT / "outputs" / "metrics.json"
 EXPERIMENT_PATH = REPO_ROOT / "outputs" / "experiment_results.csv"
-BUDGETS = (0.10, 0.30, 0.50)
-CORRUPTION_RATES = (0.0, 0.10, 0.20, 0.30)
+CURVES_PATH = REPO_ROOT / "outputs" / "method_curves.csv"
+BUDGETS = (0.10, 0.20, 0.30, 0.40, 0.50, 0.75, 1.00)
+CORRUPTION_RATES = (0.10, 0.20, 0.30)
 PRIMARY_BUDGET = 0.30
 METHODS = ("EgoSelect", "Dedup-only", "Diversity-only", "Random")
 
@@ -59,6 +60,37 @@ def main() -> int:
 
     metrics: dict = {"n_real": n_real, "budgets": {}, "primary_budget": PRIMARY_BUDGET}
     rows = []
+    curve_rows = []
+    empty_corrupt = {
+        "n_corrupt_in_pool": 0,
+        "n_corrupt_retained": 0,
+        "corrupt_retained_frac": 0.0,
+        "n_dup_retained": 0,
+        "n_idle_retained": 0,
+        "n_over_retained": 0,
+    }
+    for name in METHODS:
+        ranking, extra = clean_ranks[name]
+        ordered = (
+            ranking.sort_values("selection_rank")["episode_hash"].astype(str).tolist()
+        )
+        if len(ordered) != n_real:
+            print(f"ERROR: {name} ranking {len(ordered)} != {n_real}", file=sys.stderr)
+            return 1
+        for k in range(1, n_real + 1):
+            ev = evaluate_keep(features, ordered[:k])
+            curve_rows.append(
+                {
+                    "method": name,
+                    "k": k,
+                    "fraction": k / n_real,
+                    "coverage": ev["behavioral_region_coverage"],
+                    "quality": ev["average_quality"],
+                    "redundancy": ev["nn_redundancy"],
+                }
+            )
+
+    curves = pd.DataFrame(curve_rows)
     for frac in BUDGETS:
         k = budget_count(n_real, frac)
         metrics["budgets"][str(frac)] = {"n_keep": k, "methods": {}}
@@ -75,6 +107,16 @@ def main() -> int:
                 ev["greedy_recomputed"] = bool(extra.greedy_recomputed)
                 ev["n_rescore_passes"] = int(extra.n_rescore_passes)
             metrics["budgets"][str(frac)]["methods"][name] = ev
+            rows.append(
+                {
+                    "method": name,
+                    "budget": frac,
+                    "n_keep": k,
+                    "corruption_rate": 0.0,
+                    **ev,
+                    **empty_corrupt,
+                }
+            )
         if sizes != {k}:
             print(f"ERROR: unequal budgets at {frac}: {sizes}", file=sys.stderr)
             return 1
@@ -102,10 +144,21 @@ def main() -> int:
     exp = pd.DataFrame(rows)
     args.experiment.parent.mkdir(parents=True, exist_ok=True)
     exp.to_csv(args.experiment, index=False)
+    curves.to_csv(CURVES_PATH, index=False)
     dump_json(metrics, args.metrics)
 
+    print("\nCoverage by budget")
+    print("budget | " + " | ".join(f"{name:12s}" for name in METHODS))
+    for frac in BUDGETS:
+        k = budget_count(n_real, frac)
+        bits = [f"{frac:5.0%}  "]
+        for name in METHODS:
+            hit = curves[(curves["method"] == name) & (curves["k"] == k)].iloc[0]
+            bits.append(f"{hit['coverage']:.3f}       ")
+        print(" | ".join(bits))
+
     print("\nMethod | Keep | Coverage | Quality | Redundancy | Corruption retained")
-    primary = exp[exp["corruption_rate"] == 0.0]
+    primary = exp[(exp["corruption_rate"] == 0.0) & (exp["budget"] == PRIMARY_BUDGET)]
     for name in METHODS:
         r = primary[primary["method"] == name].iloc[0]
         c30 = exp[(exp["method"] == name) & (exp["corruption_rate"] == 0.30)].iloc[0]
@@ -119,6 +172,7 @@ def main() -> int:
         )
     print(f"wrote {args.metrics}")
     print(f"wrote {args.experiment}")
+    print(f"wrote {CURVES_PATH}")
     return 0
 
 

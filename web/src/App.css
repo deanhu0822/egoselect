@@ -29,8 +29,8 @@
 
 .shell {
   display: grid;
-  grid-template-rows: 92px 1fr 196px;
-  padding: 28px 44px 24px;
+  grid-template-rows: 84px 1fr 168px;
+  padding: 26px 44px 20px;
   overflow: hidden;
 }
 
@@ -82,12 +82,23 @@
 }
 
 .slider-value {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   font-size: 28px;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
   line-height: 1;
   color: #1c1914;
+}
+
+.slider-value em {
+  font-style: normal;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #8a8478;
 }
 
 .slider-track {
@@ -132,7 +143,7 @@
 
 .stage {
   display: grid;
-  grid-template-columns: 1fr 292px;
+  grid-template-columns: 1fr 256px;
   min-height: 0;
 }
 
@@ -177,6 +188,20 @@
   stroke-opacity: 0.22;
 }
 
+.ep.mate {
+  stroke: #1c1914;
+  stroke-width: 4;
+  stroke-opacity: 0.16;
+}
+
+.link {
+  fill: none;
+  stroke: #1c1914;
+  stroke-width: 0.85;
+  stroke-opacity: 0.2;
+  pointer-events: none;
+}
+
 .mark {
   fill: none;
   stroke: #1c1914;
@@ -191,27 +216,68 @@
 }
 
 .inspector {
-  padding: 28px 0 12px 36px;
+  padding: 28px 0 8px 32px;
   border-left: 1px solid #c9c1b2;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  min-height: 0;
 }
 
-.inspector .idle {
-  margin-top: 72px;
+.heldout {
+  margin-top: 4px;
+}
+
+.heldout .kicker {
+  margin: 0;
+}
+
+.heldout .note {
+  margin: 8px 0 22px;
+  font-size: 15px;
+  letter-spacing: -0.02em;
   color: #8a8478;
-  font-size: 16px;
+}
+
+.heldout dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.heldout dl div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.heldout dt {
+  margin: 0;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.heldout dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: 18px;
   letter-spacing: -0.02em;
 }
 
-.inspector .id {
+.inspector .kicker {
+  margin: 0;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
-  font-size: 12px;
-  letter-spacing: 0.02em;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a8478;
 }
 
 .inspector .verdict {
-  margin: 10px 0 22px;
-  font-size: 34px;
+  margin: 14px 0 28px;
+  font-size: 36px;
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -223,18 +289,20 @@
 
 .stats {
   display: grid;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 14px;
+  margin: 0 0 36px;
 }
 
 .stats div {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: baseline;
-  gap: 12px;
+  gap: 16px;
 }
 
-.stats dt {
+.stats dt,
+.nearest .k,
+.why-label {
   margin: 0;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 10px;
@@ -250,7 +318,52 @@
   letter-spacing: -0.02em;
 }
 
+.nearest {
+  margin: 0 0 36px;
+}
+
+.nearest .v {
+  margin: 10px 0 0;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.nearest .v span {
+  color: #6f6a60;
+}
+
 .why-label {
+  margin: 0 0 12px;
+}
+
+.why {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.why li {
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.why li + li {
+  margin-top: 8px;
+}
+
+.bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 28px;
+  align-items: end;
+  padding-top: 14px;
+  border-top: 1px solid #c9c1b2;
+  min-height: 0;
+}
+
+.compare-kicker {
   margin: 0 0 8px;
   font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: 10px;
@@ -259,48 +372,10 @@
   color: #8a8478;
 }
 
-.why {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.45;
-  letter-spacing: -0.015em;
-}
-
-.bottom {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 18px;
-  padding-top: 16px;
-  border-top: 1px solid #c9c1b2;
-}
-
-.live {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.live .k {
-  font-family: "SF Mono", ui-monospace, Menlo, monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #8a8478;
-}
-
-.live .v {
-  margin-top: 4px;
-  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 26px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
 .compare-row {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 32px;
+  gap: 28px;
   align-items: end;
 }
 
@@ -329,7 +404,7 @@
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: start;
-  gap: 14px;
+  gap: 12px;
   margin-top: 8px;
   font-variant-numeric: tabular-nums;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
@@ -348,7 +423,98 @@
 }
 
 .method .nums b {
+  font-weight: 400;
+  color: #8a8478;
+}
+
+.method .nums b.best {
   font-weight: 500;
+  color: #1c1914;
+}
+
+.curve-block {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 4px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.curve-block .k {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.curve-block svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.curve-grid {
+  fill: none;
+  stroke: #c9c1b2;
+  stroke-width: 0.6;
+}
+
+.curve-now {
+  fill: none;
+  stroke: #1c1914;
+  stroke-width: 0.7;
+  stroke-opacity: 0.22;
+}
+
+.curve-line {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.curve-line.rand {
+  stroke: #b7b0a3;
+  stroke-width: 1.05;
+  stroke-dasharray: 1.6 2.2;
+}
+
+.curve-line.dedup {
+  stroke: #8a8478;
+  stroke-width: 1.1;
+  stroke-dasharray: 5 3;
+}
+
+.curve-line.div {
+  stroke: #6f6a60;
+  stroke-width: 1.1;
+  stroke-dasharray: 2.2 2;
+}
+
+.curve-line.ego {
+  stroke: #1c1914;
+  stroke-width: 1.35;
+}
+
+.curve-tick {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 8px;
+  fill: #8a8478;
+  letter-spacing: 0.04em;
+}
+
+.curve-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a8478;
+}
+
+.curve-legend .ego {
   color: #1c1914;
 }
 
