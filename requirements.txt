@@ -18,4 +18,6 @@ opencv-python
 matplotlib
 projectaria-tools==2.0.0
 scaleapi
+scikit-learn
+transformers
 prettytable

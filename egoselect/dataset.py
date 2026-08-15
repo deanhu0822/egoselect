@@ -194,6 +194,36 @@ def human_cartesian_maps(*, stride: int = 1, has_head_pose: bool = True):
     return key_map, transform_list
 
 
+def ensure_episodes_local(
+    episode_hashes: Sequence[str],
+    *,
+    cache_dir: Path = DEFAULT_CACHE_DIR,
+    numworkers: int = 16,
+) -> Path:
+    """Download missing zarrs through official S3EpisodeResolver.sync_from_filters."""
+    load_env()
+    cache_dir = Path(cache_dir)
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    S3EpisodeResolver.sync_from_filters(
+        bucket_name="rldb",
+        filters=hashes_to_filter(list(episode_hashes)),
+        local_dir=cache_dir,
+        numworkers=numworkers,
+    )
+    return cache_dir
+
+
+def local_episode_path(episode_hash: str, cache_dir: Path = DEFAULT_CACHE_DIR) -> Path:
+    cache_dir = Path(cache_dir)
+    direct = cache_dir / episode_hash
+    if direct.is_dir():
+        return direct
+    dotted = cache_dir / f"{episode_hash}.zarr"
+    if dotted.is_dir():
+        return dotted
+    raise FileNotFoundError(f"Episode {episode_hash} not in {cache_dir}")
+
+
 def build_multidataset(
     episode_hashes: Sequence[str],
     *,

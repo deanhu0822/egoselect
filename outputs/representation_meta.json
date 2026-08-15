@@ -1,0 +1,64 @@
+{
+  "n_episodes": 80,
+  "visual_dim": 384,
+  "visual_pca_dim": 16,
+  "visual_pca_explained_variance_ratio": [
+    0.17789660394191742,
+    0.14307279884815216,
+    0.080772764980793,
+    0.04123661294579506,
+    0.035922519862651825,
+    0.03137959912419319,
+    0.02999992109835148,
+    0.024202656000852585,
+    0.019963093101978302,
+    0.01834171824157238,
+    0.017431456595659256,
+    0.016113335266709328,
+    0.015145664103329182,
+    0.014728435315191746,
+    0.013902232050895691,
+    0.013783799484372139
+  ],
+  "motion_columns": [
+    "path_length",
+    "displacement",
+    "mean_speed",
+    "speed_std",
+    "max_speed",
+    "mean_abs_accel",
+    "direction_change_ratio",
+    "stationary_ratio",
+    "duration_s",
+    "n_frames"
+  ],
+  "z_dim": 26,
+  "xy_explained_variance_ratio": [
+    0.2560551785496436,
+    0.09290323156212912
+  ],
+  "n_regions": 6,
+  "region_counts": {
+    "0": 3,
+    "1": 17,
+    "2": 12,
+    "3": 8,
+    "4": 24,
+    "5": 16
+  },
+  "interaction": "not used",
+  "visual_model": "facebook/dinov2-small",
+  "n_rgb": 8,
+  "nan_motion_cells": 0,
+  "skipped_hashes": [],
+  "quality_score": {
+    "min": 0.9708108108108108,
+    "median": 0.9976097811296386,
+    "max": 1.0
+  },
+  "stationary_ratio": {
+    "min": 0.0,
+    "median": 0.01593479246907601,
+    "max": 0.1945945945945946
+  }
+}

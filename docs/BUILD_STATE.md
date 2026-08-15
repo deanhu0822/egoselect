@@ -1,87 +1,81 @@
 # Build state
 
-Current phase: **Phase 1 complete**
+Current phase: **Phase 2 complete**
 
 ## Completed
 
-- Cloned current EgoVerse (`third_party/EgoVerse`, gitignored)
-- Slim Python 3.11 env with `egomimic` installed `--no-deps`
-- Public EgoVerse AWS/R2 + readonly SQL credentials via `setup_secret.sh`
-- SQL metadata loaded through `create_default_engine()` → `episode_table_to_df(engine)`
-- 80-episode cohort written
-- Thin adapter `egoselect/dataset.py` wrapping official `DatasetFilter` → `S3EpisodeResolver`/`LocalEpisodeResolver` → `MultiDataset` → `DataLoader`
-- 4 real episodes downloaded and inspected (3 Mecka + 1 RL2/Aria)
+- Sparse RGB sampling (8 uniform frames) via official `ZarrEpisode.read`; JPEGs decoded only at those indices
+- Frozen `facebook/dinov2-small` CLS embeddings, mean-pooled and L2-normalized
+- Motion stats from full `left/right.obs_ee_pose` xyz (source of cartesian `ee_pose`)
+- Transparent quality score + components
+- Visual embeddings cached separately from selector weights
+- Multimodal `z_i`, 2D PCA layout, KMeans coverage regions
+- Modal skipped (not already configured)
 
-## Sample cohort
+## Feature artifact
 
-- episode count: **80**
-- tasks (16 each): `fold_clothes`, `cup_on_saucer`, `dishwashing`, `potting_plants`, `ironing_clothes`
-- labs: `mecka` (72), `rl2` (8)
-- scenes: 24 nonempty (+ 17 blank scene rows)
-- operators: 70
-- embodiments: `human_bimanual` only
-- rigs: `mecka`, `aria_gen1`
-- SQL labels stored in the CSV for later eval only — **not** used in the behavioral representation
+`outputs/episode_features.parquet`
 
-## Confirmed runtime fields
+## Episodes successfully featurized
 
-Cartesian `Human` batch (official transform list, stride=1):
+**80 / 80** cohort episodes (all 8 RGB frames decoded)
 
-| key | shape | dtype |
-| --- | --- | --- |
-| `observations.images.front_img_1` | Mecka `[1,3,360,640]`; Aria `[1,3,480,640]` | float32, range `[0,1]` |
-| `actions_cartesian` | `[1,100,12]` | float32, finite |
-| `observations.state.ee_pose` | `[1,12]` | float32, finite |
-| `intrinsics` | `[1,3,4]` | float32, real K |
-| `embodiment` | `[1]` | int64, value `3` (`HUMAN_BIMANUAL`) |
-| `episode_hash` | str | |
+## Visual embedding
 
-On-disk zarr (not in cartesian batch): `left/right.obs_keypoints`, `left/right.obs_wrist_pose`, `obs_head_pose`, `annotations`. Aria additionally has `left/right.obs_aria_keypoints`, `obs_eye_gaze`, `obs_rgb_timestamps_ns`. Absent on inspected episodes: wrist RGB, `cmd_ee_pose`.
+- model: `facebook/dinov2-small` (no training)
+- dimensions: 384
+- PCA dimensions: 16 (before concat)
 
-Current `EMBODIMENT` enum: `human_right_arm`, `human_left_arm`, `human_bimanual`, `eva_*`. SQL also has `yam_bimanual` (not in enum; excluded). Source is SQL `lab` / `rig_name`, not vendor embodiment strings.
+Cache: `data/visual_embeddings.parquet` (gitignored). Re-running representation does not require DINO.
 
-SQL columns (446,957 rows): `episode_hash`, `operator`, `lab`, `num_frames`, `task`, `task_description`, `scene`, `objects`, `is_deleted`, `embodiment`, `is_eval`, `eval_score`, `eval_success`, `zarr_processed_path`, `zarr_processing_error`, `zarr_mp4_path`, `license`, `segments`, `created_at`, `updated_at`, `rig_name`.
+## Motion features
 
-## Exact commands that work
+`path_length`, `displacement`, `mean_speed`, `speed_std`, `max_speed`, `mean_abs_accel`, `direction_change_ratio`, `stationary_ratio`, `duration_s`, `n_frames`
+
+From bimanual xyz at metadata `fps` (30 on inspected episodes). Structured motion/quality/z/xy: **0 NaNs**. The only parquet NaNs are 17 empty SQL `scene` labels (eval metadata, not in `z_i`).
+
+## Optional interaction
+
+**Not used.** Keypoints/wrist/gaze exist on disk but are absent from the cartesian runtime batch. No grasp/contact signals were fabricated.
+
+## Quality definition
+
+```
+0.25·valid_frame_ratio
++ 0.25·trajectory_completeness
++ 0.20·finite_pose_ratio
++ 0.15·(1 − stationary_ratio)
++ 0.15·temporal_validity
+```
+
+Median quality ≈ 0.998 (cohort already filtered to complete human_bimanual zarrs). Stationary ratio range 0.00–0.19.
+
+## Representation dimensions
+
+`z_i` is 26-D: 16 visual-PCA + 10 standardized motion, then re-standardized. Frontend: `pca_x`, `pca_y`.
+
+## Behavioral region count
+
+**6** KMeans regions on `z_i` (representation-space coverage regions, not semantic skills). Sizes: 3, 17, 12, 8, 24, 16.
+
+## Exact commands
 
 ```bash
-git clone --depth 1 https://github.com/GaTech-RL2/EgoVerse.git third_party/EgoVerse
-uv venv .venv --python 3.11 && source .venv/bin/activate
-uv pip install -r requirements.txt
-uv pip install -e third_party/EgoVerse --no-deps
-# aws configure as egoverse-public, region us-east-2
-bash third_party/EgoVerse/egomimic/utils/aws/setup_secret.sh
-python scripts/audit_data.py --sample
-python scripts/audit_data.py --inspect --inspect-n 3
+source .venv/bin/activate
+python scripts/build_features.py          # sync missing zarrs, then featurize
+python scripts/build_features.py --no-sync  # local cache already complete
 ```
-
-Adapter load path:
-
-```python
-from egoselect.dataset import build_multidataset, make_loader
-ds = build_multidataset(["692e9858af371a654ce7fc3f"])
-batch = next(iter(make_loader(ds)))
-```
-
-## Artifacts
-
-- `outputs/sampled_episodes.csv`
-- `outputs/cohort_summary.json`
-- `outputs/sql_schema.json`
-- `outputs/runtime_schema.json`
-- `egoselect/dataset.py`
-- `scripts/audit_data.py`
-- local cache (gitignored): `data/egoverse_cache/` (4 episodes), `data/episode_table.parquet`
 
 ## Known limitations
 
-- Remaining 76 cohort hashes are not cached; they are loadable on demand via `S3EpisodeResolver` (do not use stale `sync_s3.py` presets that filter `embodiment=='aria'|'mecka'`).
-- Cartesian batches omit keypoints/gaze even when present on disk. Interaction features stay optional.
-- Mixed Mecka/Aria loaded with Human stride=1 (Aria configs often use 3). Fine for Phase 1 load; revisit for motion stats.
-- `S3EpisodeResolver` re-queries the full SQL table on every resolve (~20s).
-- Slim env only — not the full EgoVerse training stack.
-- No DINOv2 / PCA / selector / frontend in this phase.
+- DINOv2-small, not giant/base; 8 frames, not the full video
+- Human cartesian stride not applied to raw ee_pose motion (full-rate xyz)
+- Interaction omitted on purpose
+- Quality is weakly discriminative on this already-clean cohort
+- Region 0 has only 3 episodes
+- Modal not used
+- SQL task/lab/scene/operator stored for later eval only; not inside `z_i`
 
 ## Next phase
 
-Phase 2 — feature extraction and representation
+Phase 3 — selection, baselines, validation, corruption
