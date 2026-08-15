@@ -1,7 +1,7 @@
 # EgoSelect
 
 Capability-aware training-value curation for EgoVerse.
-
+Link to slide: https://gamma.app/docs/Keep-30-of-the-data-Keep-the-region-coverage-qodfuf4zzznz8q7?mode=doc
 ## Problem
 
 Which demonstrations are worth spending training compute on? EgoVerse mixes useful motion with near-duplicates and idle-heavy episodes. This project ranks episodes by **marginal training value**. It does not train a policy and does not claim downstream improvement.
